@@ -1,0 +1,65 @@
+name: iOS Build
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - 'native/ios/**'
+      - '.github/workflows/ios.yml'
+  pull_request:
+    branches: [main, develop]
+    paths:
+      - 'native/ios/**'
+      - '.github/workflows/ios.yml'
+  workflow_dispatch:
+
+jobs:
+  build-spm:
+    name: Build with Swift Package Manager
+    runs-on: macos-14
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Select Xcode version
+        run: sudo xcode-select -s /Applications/Xcode_15.4.app
+
+      - name: Show Swift version
+        run: swift --version
+
+      - name: Resolve Swift dependencies
+        run: swift package resolve
+        working-directory: native/ios/AngularMobile
+
+      - name: Build iOS runtime (Debug)
+        run: swift build -c debug
+        working-directory: native/ios/AngularMobile
+
+      - name: Build iOS runtime (Release)
+        run: swift build -c release
+        working-directory: native/ios/AngularMobile
+
+      - name: Run Swift tests
+        run: swift test
+        working-directory: native/ios/AngularMobile
+        continue-on-error: true
+
+  validate-podspec:
+    name: Validate CocoaPods
+    runs-on: macos-14
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Select Xcode version
+        run: sudo xcode-select -s /Applications/Xcode_15.4.app
+
+      - name: Install CocoaPods
+        run: gem install cocoapods
+
+      - name: Validate podspec
+        run: pod lib lint --allow-warnings --no-clean
+        working-directory: native/ios
+        continue-on-error: true
