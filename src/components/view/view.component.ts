@@ -108,7 +108,7 @@ export class ViewComponent implements OnInit, OnDestroy, OnChanges, Accessibilit
 
   ngOnDestroy(): void {
     if (this.viewId) {
-      this.bridgeService.removeView(this.viewId);
+      void this.bridgeService.removeView(this.viewId);
     }
   }
 

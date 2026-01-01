@@ -46,7 +46,7 @@ export class AndroidPlatform extends BasePlatform {
 
   constructor(private readonly bridge: NativeBridge) {
     super();
-    this.initializePlatform();
+    void this.initializePlatform();
   }
 
   get OS(): PlatformOS {

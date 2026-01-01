@@ -74,7 +74,7 @@ export class ToastService {
    * ```
    */
   show(message: string, duration: ToastDuration = 'short'): void {
-    this.bridgeService.send('showToast', {
+    void this.bridgeService.send('showToast', {
       message,
       duration: duration === 'long' ? 1 : 0, // Android Toast.LENGTH_LONG = 1, LENGTH_SHORT = 0
     });
@@ -87,7 +87,7 @@ export class ToastService {
     const duration = config.duration === 'long' ? 1 : 0;
     const gravity = this.getGravityValue(config.gravity);
 
-    this.bridgeService.send('showToastWithConfig', {
+    void this.bridgeService.send('showToastWithConfig', {
       message: config.message,
       duration,
       gravity,

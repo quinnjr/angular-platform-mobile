@@ -130,7 +130,7 @@ export const Easing = {
       const by = 3 * (y2 - y1) - cy;
       const ay = 1 - cy - by;
 
-      const sampleCurveY = (time: number) =>
+      const sampleCurveY = (time: number): number =>
         ((ay * time + by) * time + cy) * time;
 
       return sampleCurveY(t);
@@ -460,7 +460,7 @@ export class TimingAnimation extends Animation {
     this.isRunning = true;
     this.value._setAnimation(this);
 
-    const startAnimation = () => {
+    const startAnimation = (): void => {
       this.startTime = performance.now();
       this.animate(callback);
     };
@@ -539,7 +539,7 @@ export class SpringAnimation extends Animation {
     this.value._setAnimation(this);
     this.position = this.value.value;
 
-    const startAnimation = () => {
+    const startAnimation = (): void => {
       this.startTime = performance.now();
       this.animate(callback);
     };
@@ -686,7 +686,7 @@ export const Animated = {
     start: (callback?: AnimationCallback) => {
       let index = 0;
 
-      const runNext = () => {
+      const runNext = (): void => {
         if (index >= animations.length) {
           callback?.({ finished: true });
           return;
@@ -773,7 +773,7 @@ export const Animated = {
       const iterations = config?.iterations ?? -1; // -1 for infinite
       let currentIteration = 0;
 
-      const runIteration = () => {
+      const runIteration = (): void => {
         if (iterations !== -1 && currentIteration >= iterations) {
           callback?.({ finished: true });
           return;

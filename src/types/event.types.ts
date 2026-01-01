@@ -5,7 +5,7 @@
 /**
  * Base event interface for all native events
  */
-export interface BaseNativeEvent<T = any> {
+export interface BaseNativeEvent<T = unknown> {
   nativeEvent: T;
   target: string;
   currentTarget: string;

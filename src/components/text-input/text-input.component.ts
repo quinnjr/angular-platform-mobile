@@ -249,7 +249,7 @@ export class TextInputComponent
 
   ngOnDestroy(): void {
     if (this.viewId) {
-      this.bridgeService.removeView(this.viewId);
+      void this.bridgeService.removeView(this.viewId);
     }
   }
 
@@ -257,7 +257,7 @@ export class TextInputComponent
   writeValue(value: string): void {
     this.value = value;
     if (this.viewId) {
-      this.bridgeService.updateView(this.viewId, { value });
+      void this.bridgeService.updateView(this.viewId, { value });
     }
   }
 
@@ -272,7 +272,7 @@ export class TextInputComponent
   setDisabledState(isDisabled: boolean): void {
     this.editable = !isDisabled;
     if (this.viewId) {
-      this.bridgeService.updateView(this.viewId, { editable: !isDisabled });
+      void this.bridgeService.updateView(this.viewId, { editable: !isDisabled });
     }
   }
 

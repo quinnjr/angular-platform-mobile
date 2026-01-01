@@ -89,7 +89,7 @@ export class AlertService {
    */
   async confirm(title: string, message?: string): Promise<boolean> {
     return new Promise((resolve) => {
-      this.alert(title, message, [
+      void this.alert(title, message, [
         { text: 'Cancel', style: 'cancel', onPress: () => resolve(false) },
         { text: 'OK', onPress: () => resolve(true) },
       ]);

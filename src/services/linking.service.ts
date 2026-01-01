@@ -18,7 +18,7 @@ export class LinkingService implements OnDestroy {
   private readonly url$ = new Subject<string>();
 
   constructor(private readonly bridgeService: BridgeService) {
-    this.initialize();
+    void this.initialize();
   }
 
   /**
@@ -136,7 +136,7 @@ export class LinkingService implements OnDestroy {
     type?: string;
     extras?: Record<string, unknown>;
     flags?: number[];
-  }): Promise<any> {
+  }): Promise<unknown> {
     return this.bridgeService.request('sendIntent', options);
   }
 

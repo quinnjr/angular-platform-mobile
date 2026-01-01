@@ -110,7 +110,7 @@ export class SwitchComponent implements OnInit, OnDestroy, OnChanges, ControlVal
 
   ngOnDestroy(): void {
     if (this.viewId) {
-      this.bridgeService.removeView(this.viewId);
+      void this.bridgeService.removeView(this.viewId);
     }
   }
 
@@ -118,7 +118,7 @@ export class SwitchComponent implements OnInit, OnDestroy, OnChanges, ControlVal
   writeValue(value: boolean): void {
     this.value = value;
     if (this.viewId) {
-      this.bridgeService.updateView(this.viewId, { value });
+      void this.bridgeService.updateView(this.viewId, { value });
     }
   }
 
@@ -133,7 +133,7 @@ export class SwitchComponent implements OnInit, OnDestroy, OnChanges, ControlVal
   setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
     if (this.viewId) {
-      this.bridgeService.updateView(this.viewId, { disabled: isDisabled });
+      void this.bridgeService.updateView(this.viewId, { disabled: isDisabled });
     }
   }
 

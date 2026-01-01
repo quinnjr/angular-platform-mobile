@@ -104,7 +104,7 @@ export class StatusBarComponent implements OnInit, OnDestroy, OnChanges {
    * Set status bar visibility
    */
   private setHidden(hidden: boolean, animated?: boolean): void {
-    this.bridgeService.send('setStatusBarHidden', {
+    void this.bridgeService.send('setStatusBarHidden', {
       hidden,
       animation: animated ? (this.showHideTransition ?? 'fade') : 'none',
     });
@@ -114,7 +114,7 @@ export class StatusBarComponent implements OnInit, OnDestroy, OnChanges {
    * Set status bar style
    */
   private setBarStyle(style: StatusBarStyle, animated?: boolean): void {
-    this.bridgeService.send('setStatusBarStyle', {
+    void this.bridgeService.send('setStatusBarStyle', {
       style,
       animated: animated ?? false,
     });
@@ -124,7 +124,7 @@ export class StatusBarComponent implements OnInit, OnDestroy, OnChanges {
    * Set status bar background color
    */
   private setBackgroundColor(color: string, animated?: boolean): void {
-    this.bridgeService.send('setStatusBarBackgroundColor', {
+    void this.bridgeService.send('setStatusBarBackgroundColor', {
       color,
       animated: animated ?? false,
     });
@@ -134,7 +134,7 @@ export class StatusBarComponent implements OnInit, OnDestroy, OnChanges {
    * Set status bar translucent
    */
   private setTranslucent(translucent: boolean): void {
-    this.bridgeService.send('setStatusBarTranslucent', {
+    void this.bridgeService.send('setStatusBarTranslucent', {
       translucent,
     });
   }
@@ -147,7 +147,7 @@ export class StatusBarComponent implements OnInit, OnDestroy, OnChanges {
    * Show the status bar
    */
   static show(bridgeService: BridgeService, animation?: StatusBarAnimation): void {
-    bridgeService.send('setStatusBarHidden', {
+    void bridgeService.send('setStatusBarHidden', {
       hidden: false,
       animation: animation ?? 'fade',
     });
@@ -157,7 +157,7 @@ export class StatusBarComponent implements OnInit, OnDestroy, OnChanges {
    * Hide the status bar
    */
   static hide(bridgeService: BridgeService, animation?: StatusBarAnimation): void {
-    bridgeService.send('setStatusBarHidden', {
+    void bridgeService.send('setStatusBarHidden', {
       hidden: true,
       animation: animation ?? 'fade',
     });
@@ -167,14 +167,14 @@ export class StatusBarComponent implements OnInit, OnDestroy, OnChanges {
    * Set the status bar style
    */
   static setStyle(bridgeService: BridgeService, style: StatusBarStyle): void {
-    bridgeService.send('setStatusBarStyle', { style });
+    void bridgeService.send('setStatusBarStyle', { style });
   }
 
   /**
    * Set the status bar background color
    */
   static setColor(bridgeService: BridgeService, color: string): void {
-    bridgeService.send('setStatusBarBackgroundColor', { color });
+    void bridgeService.send('setStatusBarBackgroundColor', { color });
   }
 
   /**
@@ -185,7 +185,7 @@ export class StatusBarComponent implements OnInit, OnDestroy, OnChanges {
     props: { barStyle?: StatusBarStyle; backgroundColor?: string; hidden?: boolean }
   ): string {
     const entryId = `statusbar_${Date.now()}`;
-    bridgeService.send('pushStatusBarStackEntry', { id: entryId, props });
+    void bridgeService.send('pushStatusBarStackEntry', { id: entryId, props });
     return entryId;
   }
 
@@ -193,7 +193,7 @@ export class StatusBarComponent implements OnInit, OnDestroy, OnChanges {
    * Pop a status bar configuration from the stack
    */
   static popStackEntry(bridgeService: BridgeService, entryId: string): void {
-    bridgeService.send('popStatusBarStackEntry', { id: entryId });
+    void bridgeService.send('popStatusBarStackEntry', { id: entryId });
   }
 
   /**
@@ -204,7 +204,7 @@ export class StatusBarComponent implements OnInit, OnDestroy, OnChanges {
     entryId: string,
     props: { barStyle?: StatusBarStyle; backgroundColor?: string; hidden?: boolean }
   ): void {
-    bridgeService.send('replaceStatusBarStackEntry', { id: entryId, props });
+    void bridgeService.send('replaceStatusBarStackEntry', { id: entryId, props });
   }
 
   /**

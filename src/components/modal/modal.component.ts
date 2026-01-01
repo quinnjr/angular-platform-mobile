@@ -137,7 +137,7 @@ export class ModalComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnDestroy(): void {
     if (this.viewId) {
-      this.hideModal();
+      void this.hideModal();
     }
   }
 

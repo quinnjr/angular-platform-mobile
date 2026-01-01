@@ -109,13 +109,13 @@ export class SafeAreaViewComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     if (Object.keys(props).length > 0) {
-      this.bridgeService.updateView(this.viewId, this.getProps());
+      void this.bridgeService.updateView(this.viewId, this.getProps());
     }
   }
 
   ngOnDestroy(): void {
     if (this.viewId) {
-      this.bridgeService.removeView(this.viewId);
+      void this.bridgeService.removeView(this.viewId);
     }
   }
 
@@ -192,7 +192,7 @@ export class SafeAreaViewComponent implements OnInit, OnDestroy, OnChanges {
         previousInsets.bottom !== insets.bottom ||
         previousInsets.left !== insets.left
       ) {
-        this.bridgeService.updateView(this.viewId!, this.getProps());
+        void this.bridgeService.updateView(this.viewId!, this.getProps());
 
         if (this.emitInsetChanges) {
           this.insetsChange.emit(this.getAppliedInsets());
@@ -220,7 +220,7 @@ export class SafeAreaViewComponent implements OnInit, OnDestroy, OnChanges {
   async refresh(): Promise<void> {
     await this.fetchSafeAreaInsets();
     if (this.viewId) {
-      this.bridgeService.updateView(this.viewId, this.getProps());
+      void this.bridgeService.updateView(this.viewId, this.getProps());
     }
   }
 

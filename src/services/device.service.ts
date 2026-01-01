@@ -67,7 +67,7 @@ export class DeviceService implements OnDestroy {
   private deviceInfo: DeviceInfo | null = null;
 
   constructor(private readonly bridgeService: BridgeService) {
-    this.initialize();
+    void this.initialize();
   }
 
   /**

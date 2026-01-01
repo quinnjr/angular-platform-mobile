@@ -193,7 +193,7 @@ export class WebViewComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnDestroy(): void {
     if (this.viewId) {
-      this.bridgeService.removeView(this.viewId);
+      void this.bridgeService.removeView(this.viewId);
     }
   }
 

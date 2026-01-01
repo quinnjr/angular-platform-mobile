@@ -113,7 +113,7 @@ export class ViewRegistry {
       return descendants;
     }
 
-    const traverse = (nodeId: string) => {
+    const traverse = (nodeId: string): void => {
       const n = this.views.get(nodeId);
       if (!n) return;
 

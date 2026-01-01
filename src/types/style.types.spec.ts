@@ -99,14 +99,16 @@ describe('Style Types', () => {
     });
 
     it('should handle percentage values', () => {
-      const style: ViewStyle = { width: '50%' as any };
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const style: ViewStyle = { width: '50%' as unknown as ViewStyle['width'] };
       const transformed = transformStyle(style);
 
       expect(transformed.width).toEqual({ type: 'percent', value: 50 });
     });
 
     it('should skip undefined values', () => {
-      const style: ViewStyle = { flex: 1, backgroundColor: undefined as any };
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const style: ViewStyle = { flex: 1, backgroundColor: undefined as unknown as ViewStyle['backgroundColor'] };
       const transformed = transformStyle(style);
 
       expect(transformed.flex).toBe(1);

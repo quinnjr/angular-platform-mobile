@@ -9,7 +9,7 @@ import { BridgeService } from '../core/bridge/bridge.service';
  */
 @Injectable()
 export class StorageService {
-  private cache = new Map<string, any>();
+  private cache = new Map<string, unknown>();
   private isInitialized = false;
 
   constructor(private readonly bridgeService: BridgeService) {}
@@ -40,10 +40,10 @@ export class StorageService {
   /**
    * Get a value from storage
    */
-  async getItem<T = any>(key: string): Promise<T | null> {
+  async getItem<T = unknown>(key: string): Promise<T | null> {
     // Check cache first
     if (this.cache.has(key)) {
-      return this.cache.get(key);
+      return this.cache.get(key) as T;
     }
 
     try {
@@ -65,7 +65,7 @@ export class StorageService {
   /**
    * Set a value in storage
    */
-  async setItem<T = any>(key: string, value: T): Promise<void> {
+  async setItem<T = unknown>(key: string, value: T): Promise<void> {
     try {
       const stringValue = JSON.stringify(value);
 
@@ -122,7 +122,7 @@ export class StorageService {
   /**
    * Get multiple items at once
    */
-  async multiGet<T = any>(keys: string[]): Promise<Array<[string, T | null]>> {
+  async multiGet<T = unknown>(keys: string[]): Promise<Array<[string, T | null]>> {
     try {
       const results = await this.bridgeService.request<Record<string, string | null>>(
         'multiGetStorageItems',
@@ -147,7 +147,7 @@ export class StorageService {
   /**
    * Set multiple items at once
    */
-  async multiSet(keyValuePairs: Array<[string, any]>): Promise<void> {
+  async multiSet(keyValuePairs: Array<[string, unknown]>): Promise<void> {
     try {
       const serialized: Record<string, string> = {};
 

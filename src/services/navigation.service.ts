@@ -255,7 +255,7 @@ export class NavigationService implements OnDestroy {
       .on<void>('hardwareBackPress')
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
-        this.goBack();
+        void this.goBack();
       });
   }
 
