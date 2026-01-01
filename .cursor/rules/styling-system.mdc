@@ -1,0 +1,174 @@
+# Styling System
+
+## Style Types
+
+### ViewStyle
+```typescript
+const containerStyle: ViewStyle = {
+  flex: 1,
+  flexDirection: 'row',
+  justifyContent: 'center',
+  alignItems: 'center',
+  backgroundColor: '#ffffff',
+  padding: 16,
+  margin: 8,
+  borderRadius: 8,
+  borderWidth: 1,
+  borderColor: '#cccccc',
+
+  // Shadows (iOS)
+  shadowColor: '#000',
+  shadowOffset: { width: 0, height: 2 },
+  shadowOpacity: 0.25,
+  shadowRadius: 3.84,
+
+  // Shadows (Android)
+  elevation: 5,
+};
+```
+
+### TextStyle
+```typescript
+const textStyle: TextStyle = {
+  fontSize: 16,
+  fontWeight: 'bold',
+  fontFamily: 'Roboto',
+  color: '#333333',
+  textAlign: 'center',
+  lineHeight: 24,
+  letterSpacing: 0.5,
+  textDecorationLine: 'underline',
+  textTransform: 'uppercase',
+};
+```
+
+### ImageStyle
+```typescript
+const imageStyle: ImageStyle = {
+  width: 100,
+  height: 100,
+  resizeMode: 'cover',
+  borderRadius: 50, // Circular
+  tintColor: '#007AFF',
+};
+```
+
+## StyleService
+
+```typescript
+import { StyleService } from '@pegasusheavy/angular-platform-mobile';
+
+@Component({...})
+export class MyComponent {
+  constructor(private styleService: StyleService) {}
+
+  // Create stylesheet
+  styles = this.styleService.create({
+    container: { flex: 1 },
+    title: { fontSize: 24 },
+  });
+
+  // Merge styles
+  mergedStyle = this.styleService.flatten(
+    this.styles.container,
+    isActive && this.styles.active,
+    customStyle
+  );
+
+  // Conditional composition
+  buttonStyle = this.styleService.compose(
+    this.styles.button,
+    [
+      [this.disabled, this.styles.buttonDisabled],
+      [this.loading, this.styles.buttonLoading],
+    ]
+  );
+}
+```
+
+## Style Presets
+
+```typescript
+// Available via styleService.presets
+const { presets } = this.styleService;
+
+// Layout
+presets.row          // { flexDirection: 'row' }
+presets.column       // { flexDirection: 'column' }
+presets.center       // { justifyContent: 'center', alignItems: 'center' }
+presets.flex1        // { flex: 1 }
+
+// Shadows
+presets.shadow       // Standard shadow
+presets.shadowLight  // Light shadow
+presets.shadowMedium // Medium shadow
+presets.shadowHeavy  // Heavy shadow
+
+// Spacing
+presets.p1 - presets.p6  // padding 4-24
+presets.m1 - presets.m6  // margin 4-24
+
+// Border radius
+presets.rounded      // { borderRadius: 8 }
+presets.roundedSm    // { borderRadius: 4 }
+presets.roundedLg    // { borderRadius: 16 }
+presets.roundedFull  // { borderRadius: 9999 }
+```
+
+## Responsive Styles
+
+```typescript
+const responsiveStyle = this.styleService.responsive(
+  { fontSize: 14 },  // Base
+  {
+    sm: { fontSize: 16 },   // >= 320px
+    md: { fontSize: 18 },   // >= 480px
+    lg: { fontSize: 20 },   // >= 768px
+    xl: { fontSize: 24 },   // >= 1024px
+  }
+);
+
+// Usage with device width
+const finalStyle = responsiveStyle(this.deviceWidth);
+```
+
+## Themed Styles
+
+```typescript
+const themedStyles = this.styleService.themed(
+  // Light theme
+  {
+    container: { backgroundColor: '#ffffff' },
+    text: { color: '#000000' },
+  },
+  // Dark theme overrides
+  {
+    container: { backgroundColor: '#1a1a1a' },
+    text: { color: '#ffffff' },
+  }
+);
+
+// Usage
+const styles = themedStyles(this.isDarkMode);
+```
+
+## Platform-Specific Styles
+
+```typescript
+import { Platform } from '@pegasusheavy/angular-platform-mobile';
+
+const buttonStyle: ViewStyle = {
+  padding: 12,
+  ...Platform.select({
+    ios: {
+      borderRadius: 8,
+      backgroundColor: '#007AFF',
+    },
+    android: {
+      borderRadius: 4,
+      backgroundColor: '#6200EE',
+      elevation: 2,
+    },
+  }),
+};
+```

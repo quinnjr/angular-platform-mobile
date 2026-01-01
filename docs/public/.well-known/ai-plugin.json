@@ -1,0 +1,17 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "Angular Platform Mobile Docs",
+  "name_for_model": "angular_platform_mobile_docs",
+  "description_for_human": "Documentation for Angular Platform Mobile - build native iOS and Android apps with Angular",
+  "description_for_model": "Access documentation for Angular Platform Mobile, a React Native-like framework for building native mobile applications using Angular. Use this to help developers understand how to build native iOS and Android apps with Angular, including components, services, styling, and CLI usage.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://angular-platform-mobile.dev/openapi.yaml"
+  },
+  "logo_url": "https://angular-platform-mobile.dev/logo.png",
+  "contact_email": "support@pegasusheavy.com",
+  "legal_info_url": "https://angular-platform-mobile.dev/legal"
+}

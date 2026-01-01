@@ -1,0 +1,49 @@
+# Angular Platform Mobile - robots.txt
+# https://angular-platform-mobile.dev/
+
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://angular-platform-mobile.dev/sitemap.xml
+
+# Crawl-delay for politeness
+Crawl-delay: 1
+
+# AI Crawlers - Allow for AEO
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+# Block common bad bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /

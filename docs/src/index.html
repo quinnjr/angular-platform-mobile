@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Angular Platform Mobile - Build Native iOS & Android Apps with Angular</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Primary SEO Meta Tags -->
+  <meta name="title" content="Angular Platform Mobile - Build Native iOS & Android Apps with Angular">
+  <meta name="description" content="Build truly native iOS and Android mobile applications using Angular. React Native-like framework with native performance, familiar Angular patterns, and cross-platform code sharing. No WebView, real native components.">
+  <meta name="keywords" content="angular mobile, angular native, angular ios, angular android, react native alternative, angular cross-platform, mobile app framework, native mobile development, angular mobile framework, build mobile apps angular">
+  <meta name="author" content="Pegasus Heavy Industries">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow">
+  <meta name="theme-color" content="#dd0031">
+  <link rel="canonical" href="https://angular-platform-mobile.dev/">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://angular-platform-mobile.dev/">
+  <meta property="og:title" content="Angular Platform Mobile - Build Native iOS & Android Apps with Angular">
+  <meta property="og:description" content="Build truly native iOS and Android mobile applications using Angular. React Native-like framework with native performance and familiar Angular patterns.">
+  <meta property="og:image" content="https://angular-platform-mobile.dev/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Angular Platform Mobile">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://angular-platform-mobile.dev/">
+  <meta name="twitter:title" content="Angular Platform Mobile - Build Native iOS & Android Apps with Angular">
+  <meta name="twitter:description" content="Build truly native iOS and Android mobile applications using Angular. React Native-like framework with native performance and familiar Angular patterns.">
+  <meta name="twitter:image" content="https://angular-platform-mobile.dev/og-image.png">
+
+  <!-- Additional SEO -->
+  <meta name="application-name" content="Angular Platform Mobile">
+  <meta name="apple-mobile-web-app-title" content="Angular Platform Mobile">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="format-detection" content="telephone=no">
+
+  <!-- Favicons & PWA -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Preconnect for Performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- DNS Prefetch -->
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+
+  <!-- JSON-LD Structured Data for AEO (Answer Engine Optimization) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Angular Platform Mobile",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Cross-platform (iOS, Android)",
+    "description": "A React Native-like framework for building native iOS and Android applications using Angular. Write your UI logic in TypeScript while rendering actual native components.",
+    "url": "https://angular-platform-mobile.dev/",
+    "downloadUrl": "https://www.npmjs.com/package/@pegasusheavy/angular-platform-mobile",
+    "softwareVersion": "0.1.0",
+    "author": {
+      "@type": "Organization",
+      "name": "Pegasus Heavy Industries",
+      "url": "https://pegasusheavy.com"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Pegasus Heavy Industries"
+    },
+    "license": "https://opensource.org/licenses/MIT",
+    "programmingLanguage": ["TypeScript", "JavaScript"],
+    "runtimePlatform": "Node.js",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5",
+      "ratingCount": "1"
+    }
+  }
+  </script>
+
+  <!-- Organization Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Pegasus Heavy Industries",
+    "url": "https://pegasusheavy.com",
+    "logo": "https://angular-platform-mobile.dev/logo.png",
+    "sameAs": [
+      "https://github.com/PegasusHeavyIndustries",
+      "https://www.patreon.com/c/PegasusHeavyIndustries"
+    ]
+  }
+  </script>
+
+  <!-- WebSite Schema for Sitelinks Search Box -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Angular Platform Mobile Documentation",
+    "url": "https://angular-platform-mobile.dev/",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://angular-platform-mobile.dev/search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <!-- FAQ Schema for AEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is Angular Platform Mobile?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Angular Platform Mobile is a React Native-like framework that enables developers to build truly native iOS and Android applications using Angular. It provides a bridge between Angular components and native mobile views, allowing you to write your UI logic in TypeScript while rendering actual native components - not WebViews."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How is Angular Platform Mobile different from Ionic?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Unlike Ionic which uses WebViews to render web content inside a native shell, Angular Platform Mobile renders actual native UI components (UIView on iOS, ViewGroup on Android). This provides true native performance, native look and feel, and access to platform-specific features without the overhead of a WebView."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I share code between iOS and Android with Angular Platform Mobile?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes! Angular Platform Mobile allows you to write your business logic and UI components once in Angular/TypeScript and deploy to both iOS and Android. Platform-specific code can be handled through the Platform API when needed, but most code is shared across platforms."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What Angular version does Angular Platform Mobile support?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Angular Platform Mobile supports Angular 18 and above. It is designed to work with Angular's latest features including standalone components, signals, and the new control flow syntax."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I install Angular Platform Mobile?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Install via npm: 'npm install @pegasusheavy/angular-platform-mobile' or pnpm: 'pnpm add @pegasusheavy/angular-platform-mobile'. Then use the CLI to create a new project: 'npx ng-mobile init my-app --platform both'."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Angular Platform Mobile free to use?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, Angular Platform Mobile is completely free and open source under the MIT license. You can use it for personal and commercial projects without any cost or licensing fees."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- HowTo Schema for Installation -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to Build a Native Mobile App with Angular",
+    "description": "Learn how to create a native iOS and Android application using Angular Platform Mobile in just a few steps.",
+    "totalTime": "PT10M",
+    "estimatedCost": {
+      "@type": "MonetaryAmount",
+      "currency": "USD",
+      "value": "0"
+    },
+    "tool": [
+      {
+        "@type": "HowToTool",
+        "name": "Node.js 18+"
+      },
+      {
+        "@type": "HowToTool",
+        "name": "Angular CLI"
+      },
+      {
+        "@type": "HowToTool",
+        "name": "Xcode (for iOS)"
+      },
+      {
+        "@type": "HowToTool",
+        "name": "Android Studio (for Android)"
+      }
+    ],
+    "step": [
+      {
+        "@type": "HowToStep",
+        "name": "Install the package",
+        "text": "Install Angular Platform Mobile using npm or pnpm: npm install @pegasusheavy/angular-platform-mobile",
+        "position": 1
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Initialize a new project",
+        "text": "Run the CLI to create a new project: npx ng-mobile init my-app --platform both",
+        "position": 2
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Create your Angular component",
+        "text": "Write your UI using Angular components with mobile-prefixed selectors like mobile-view, mobile-text, mobile-button",
+        "position": 3
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Run on device",
+        "text": "Use the CLI to run on a device or emulator: npx ng-mobile run android or npx ng-mobile run ios",
+        "position": 4
+      }
+    ]
+  }
+  </script>
+
+  <!-- BreadcrumbList Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://angular-platform-mobile.dev/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Documentation",
+        "item": "https://angular-platform-mobile.dev/getting-started"
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <app-root></app-root>
+
+  <!-- Structured Data for Code Samples (helps AI understand code examples) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Angular Platform Mobile Documentation",
+    "description": "Complete documentation for building native mobile apps with Angular",
+    "author": {
+      "@type": "Organization",
+      "name": "Pegasus Heavy Industries"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Pegasus Heavy Industries"
+    },
+    "datePublished": "2026-01-01",
+    "dateModified": "2026-01-01",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://angular-platform-mobile.dev/"
+    },
+    "about": [
+      {
+        "@type": "Thing",
+        "name": "Angular",
+        "sameAs": "https://angular.io/"
+      },
+      {
+        "@type": "Thing",
+        "name": "Mobile Development",
+        "sameAs": "https://en.wikipedia.org/wiki/Mobile_app_development"
+      },
+      {
+        "@type": "Thing",
+        "name": "iOS Development",
+        "sameAs": "https://developer.apple.com/ios/"
+      },
+      {
+        "@type": "Thing",
+        "name": "Android Development",
+        "sameAs": "https://developer.android.com/"
+      }
+    ]
+  }
+  </script>
+</body>
+</html>

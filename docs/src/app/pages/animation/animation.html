@@ -1,0 +1,243 @@
+<h1>Animation</h1>
+
+<p class="lead">
+  Angular Platform Mobile provides a declarative animation API similar to React Native's
+  Animated. Create smooth, 60fps animations that run on the native thread.
+</p>
+
+<h2>Animated Values</h2>
+
+<p>Create animated values to drive your animations:</p>
+
+<pre><code>import &#123; Animated &#125; from '&#64;pegasusheavy/angular-platform-mobile';
+
+// Single animated value
+const opacity = new Animated.Value(0);
+
+// XY value for position animations
+const position = new Animated.ValueXY(&#123; x: 0, y: 0 &#125;);</code></pre>
+
+<h2>Timing Animation</h2>
+
+<p>Animate a value over time with configurable easing:</p>
+
+<pre><code>Animated.timing(opacity, &#123;
+  toValue: 1,
+  duration: 300,
+  delay: 100,
+  easing: Easing.ease,
+  useNativeDriver: true,
+&#125;).start((result) => &#123;
+  if (result.finished) &#123;
+    console.log('Animation completed');
+  &#125;
+&#125;);</code></pre>
+
+<h2>Spring Animation</h2>
+
+<p>Physics-based animation with natural feel:</p>
+
+<pre><code>Animated.spring(scale, &#123;
+  toValue: 1,
+  stiffness: 100,
+  damping: 10,
+  mass: 1,
+  velocity: 0,
+  useNativeDriver: true,
+&#125;).start();</code></pre>
+
+<h2>Easing Functions</h2>
+
+<p>Built-in easing functions for different animation curves:</p>
+
+<pre><code>import &#123; Easing &#125; from '&#64;pegasusheavy/angular-platform-mobile';
+
+// Linear
+Easing.linear
+
+// Standard easing
+Easing.ease
+Easing.easeIn
+Easing.easeOut
+Easing.easeInOut
+
+// Polynomial
+Easing.quad      // Quadratic
+Easing.cubic     // Cubic
+Easing.poly(n)   // Custom polynomial
+
+// Trigonometric
+Easing.sin
+Easing.circle
+
+// Exponential
+Easing.exp
+
+// Special
+Easing.elastic(bounciness)
+Easing.back(overshoot)
+Easing.bounce
+
+// Custom cubic bezier
+Easing.bezier(0.25, 0.1, 0.25, 1)</code></pre>
+
+<h2>Interpolation</h2>
+
+<p>Map animated values to different output ranges:</p>
+
+<pre><code>const rotation = opacity.interpolate(&#123;
+  inputRange: [0, 1],
+  outputRange: ['0deg', '360deg'],
+&#125;);
+
+const backgroundColor = progress.interpolate(&#123;
+  inputRange: [0, 0.5, 1],
+  outputRange: ['#ff0000', '#00ff00', '#0000ff'],
+  extrapolate: 'clamp',
+&#125;);
+
+const scale = scrollY.interpolate(&#123;
+  inputRange: [-100, 0, 100],
+  outputRange: [1.5, 1, 0.8],
+  extrapolateLeft: 'extend',
+  extrapolateRight: 'clamp',
+&#125;);</code></pre>
+
+<h2>Composition</h2>
+
+<h3>Sequence</h3>
+<p>Run animations one after another:</p>
+
+<pre><code>Animated.sequence([
+  Animated.timing(opacity, &#123; toValue: 1, duration: 200 &#125;),
+  Animated.timing(scale, &#123; toValue: 1.2, duration: 150 &#125;),
+  Animated.timing(scale, &#123; toValue: 1, duration: 150 &#125;),
+]).start();</code></pre>
+
+<h3>Parallel</h3>
+<p>Run animations simultaneously:</p>
+
+<pre><code>Animated.parallel([
+  Animated.timing(opacity, &#123; toValue: 1, duration: 300 &#125;),
+  Animated.timing(translateY, &#123; toValue: 0, duration: 300 &#125;),
+]).start();</code></pre>
+
+<h3>Stagger</h3>
+<p>Start animations with a delay between each:</p>
+
+<pre><code>const itemAnimations = items.map((_, i) =>
+  Animated.timing(itemOpacity[i], &#123; toValue: 1, duration: 200 &#125;)
+);
+
+Animated.stagger(100, itemAnimations).start();</code></pre>
+
+<h3>Loop</h3>
+<p>Repeat an animation:</p>
+
+<pre><code>Animated.loop(
+  Animated.sequence([
+    Animated.timing(pulse, &#123; toValue: 1.1, duration: 500 &#125;),
+    Animated.timing(pulse, &#123; toValue: 1, duration: 500 &#125;),
+  ]),
+  &#123; iterations: -1 &#125;  // -1 for infinite
+).start();</code></pre>
+
+<h2>Complete Example</h2>
+
+<p>A fade-in card animation:</p>
+
+<pre><code>import &#123; Component, OnInit &#125; from '&#64;angular/core';
+import &#123;
+  Animated,
+  Easing,
+  StyleSheet,
+&#125; from '&#64;pegasusheavy/angular-platform-mobile';
+
+&#64;Component(&#123;
+  selector: 'app-animated-card',
+  template: \`
+    &lt;mobile-view
+      [style]="[styles.card, getAnimatedStyle()]"&gt;
+      &lt;mobile-text [style]="styles.title"&gt;
+        Welcome!
+      &lt;/mobile-text&gt;
+      &lt;mobile-text [style]="styles.description"&gt;
+        This card animated in smoothly.
+      &lt;/mobile-text&gt;
+    &lt;/mobile-view&gt;
+  \`,
+&#125;)
+export class AnimatedCardComponent implements OnInit &#123;
+  private opacity = new Animated.Value(0);
+  private translateY = new Animated.Value(30);
+
+  styles = StyleSheet.create(&#123;
+    card: &#123;
+      backgroundColor: '#ffffff',
+      borderRadius: 12,
+      padding: 20,
+      margin: 16,
+      shadowColor: '#000',
+      shadowOffset: &#123; width: 0, height: 4 &#125;,
+      shadowOpacity: 0.15,
+      shadowRadius: 8,
+      elevation: 5,
+    &#125;,
+    title: &#123;
+      fontSize: 20,
+      fontWeight: 'bold',
+      marginBottom: 8,
+    &#125;,
+    description: &#123;
+      fontSize: 14,
+      color: '#666',
+    &#125;,
+  &#125;);
+
+  ngOnInit() &#123;
+    this.animateIn();
+  &#125;
+
+  private animateIn() &#123;
+    Animated.parallel([
+      Animated.timing(this.opacity, &#123;
+        toValue: 1,
+        duration: 400,
+        easing: Easing.easeOut,
+        useNativeDriver: true,
+      &#125;),
+      Animated.timing(this.translateY, &#123;
+        toValue: 0,
+        duration: 400,
+        easing: Easing.easeOut,
+        useNativeDriver: true,
+      &#125;),
+    ]).start();
+  &#125;
+
+  getAnimatedStyle() &#123;
+    return &#123;
+      opacity: this.opacity,
+      transform: [&#123; translateY: this.translateY &#125;],
+    &#125;;
+  &#125;
+&#125;</code></pre>
+
+<h2>Best Practices</h2>
+
+<ul>
+  <li><strong>Use native driver</strong> when possible for 60fps animations</li>
+  <li><strong>Avoid layout animations</strong> with native driver (width, height, padding, margin)</li>
+  <li><strong>Use interpolation</strong> for complex value mappings</li>
+  <li><strong>Stop animations</strong> when component unmounts to prevent memory leaks</li>
+  <li><strong>Prefer spring</strong> for interactive animations (feels more natural)</li>
+</ul>
+
+<div class="info-box">
+  <h4>💡 Native Driver</h4>
+  <p>
+    Set <code>useNativeDriver: true</code> to run animations on the native thread.
+    This prevents JavaScript thread blocking and ensures smooth 60fps animations.
+    Note: Only opacity and transform properties are supported with native driver.
+  </p>
+</div>

@@ -1,0 +1,127 @@
+# Service Development Patterns
+
+## Creating Native Services
+
+### Basic Structure
+```typescript
+import { Injectable, OnDestroy, Inject } from '@angular/core';
+import { Subject, Observable } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { BridgeService } from '../core/bridge/bridge.service';
+import { PLATFORM, IPlatform } from '../core/platform/platform';
+
+@Injectable({
+  providedIn: 'root', // Or omit for module-scoped
+})
+export class MyNativeService implements OnDestroy {
+  private readonly destroy$ = new Subject<void>();
+
+  constructor(
+    private readonly bridgeService: BridgeService,
+    @Inject(PLATFORM) private readonly platform: IPlatform
+  ) {
+    this.initialize();
+  }
+
+  private initialize(): void {
+    // Subscribe to native events
+    this.bridgeService
+      .on<SomeEventType>('someNativeEvent')
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data) => {
+        // Handle event
+      });
+  }
+
+  /**
+   * Public API method
+   */
+  async doSomething(param: string): Promise<ResultType> {
+    return this.bridgeService.request<ResultType>('nativeMethod', { param });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+}
+```
+
+### Platform-Specific Logic
+```typescript
+@Injectable()
+export class DeviceService {
+  constructor(@Inject(PLATFORM) private readonly platform: IPlatform) {}
+
+  getStatusBarHeight(): number {
+    return this.platform.select({
+      ios: this.platform.getSafeAreaInsets().top,
+      android: 24, // Standard Android status bar
+      default: 0,
+    }) ?? 0;
+  }
+
+  supportsHaptics(): boolean {
+    if (this.platform.isIOS) {
+      return this.platform.isVersionAtLeast(10);
+    }
+    return this.platform.isVersionAtLeast(26); // Android O
+  }
+}
+```
+
+### Observable Patterns
+```typescript
+@Injectable()
+export class NetworkService implements OnDestroy {
+  private readonly destroy$ = new Subject<void>();
+  private readonly connectionState$ = new BehaviorSubject<boolean>(true);
+
+  get isConnected$(): Observable<boolean> {
+    return this.connectionState$.asObservable();
+  }
+
+  get isConnected(): boolean {
+    return this.connectionState$.getValue();
+  }
+
+  private initialize(): void {
+    this.bridgeService
+      .on<{ isConnected: boolean }>('networkChange')
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(({ isConnected }) => {
+        this.connectionState$.next(isConnected);
+      });
+  }
+}
+```
+
+## Available Services
+
+| Service | Purpose |
+|---------|---------|
+| `StyleService` | Style creation and transformation |
+| `NavigationService` | Native navigation |
+| `DeviceService` | Device info and dimensions |
+| `StorageService` | AsyncStorage wrapper |
+| `PermissionsService` | Permission requests |
+| `AlertService` | Native alerts and action sheets |
+| `LinkingService` | URL handling and deep links |
+| `ClipboardService` | Clipboard operations |
+| `ShareService` | Native share sheet |
+| `ToastService` | Toast notifications |
+| `HapticService` | Haptic feedback |
+| `BiometricService` | Face ID/Touch ID/Fingerprint |
+
+## Error Handling Pattern
+```typescript
+async performAction(): Promise<void> {
+  try {
+    await this.bridgeService.request('riskyAction', {});
+  } catch (error: unknown) {
+    const err = error as { message?: string; code?: string };
+    console.error('[ServiceName] Action failed:', err.message);
+    // Handle gracefully
+  }
+}
+```

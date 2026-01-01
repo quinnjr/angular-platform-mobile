@@ -1,0 +1,56 @@
+<h1>Services</h1>
+
+<p class="lead">
+  Angular Platform Mobile provides injectable services that wrap native platform APIs.
+  These services give you access to device features, system capabilities, and native UI
+  components from your Angular code.
+</p>
+
+<h2>Available Services</h2>
+
+<div class="service-grid">
+  @for (service of services; track service.path) {
+    <a [routerLink]="service.path" class="service-card">
+      <div class="service-header">
+        <span class="service-icon">{{ service.icon }}</span>
+        <h3>{{ service.name }}</h3>
+      </div>
+      <p class="service-description">{{ service.description }}</p>
+    </a>
+  }
+</div>
+
+<h2>Using Services</h2>
+
+<p>Services are provided at the root level and can be injected into any component:</p>
+
+<pre><code [textContent]="codeExample1"></code></pre>
+
+<h2>Service Patterns</h2>
+
+<h3>Observables for State</h3>
+
+<p>Many services expose reactive observables for state that can change:</p>
+
+<pre><code [textContent]="codeExample2"></code></pre>
+
+<h3>Async Methods for Actions</h3>
+
+<p>Actions that interact with native APIs return Promises:</p>
+
+<pre><code [textContent]="codeExample3"></code></pre>
+
+<h2>Platform Considerations</h2>
+
+<p>
+  Some services have platform-specific behavior. Always check the documentation
+  for each service to understand differences between iOS and Android.
+</p>
+
+<div class="info-box">
+  <h4>💡 Tip</h4>
+  <p>
+    Use <code>Platform.select()</code> when you need different behavior on each platform,
+    or check <code>Platform.isIOS</code> / <code>Platform.isAndroid</code> for conditional logic.
+  </p>
+</div>

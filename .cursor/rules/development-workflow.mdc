@@ -1,0 +1,140 @@
+# Development Workflow
+
+## Package Manager
+
+This project uses **pnpm** (not npm or yarn).
+
+```bash
+# Install dependencies
+pnpm install
+
+# Add dependency
+pnpm add <package>
+
+# Add dev dependency
+pnpm add -D <package>
+```
+
+## Build Commands
+
+```bash
+# Build TypeScript
+pnpm build
+
+# Build with watch
+pnpm build:watch
+
+# Run tests
+pnpm test
+
+# Run tests in watch mode
+pnpm test:watch
+
+# Run tests with coverage
+pnpm test:coverage
+
+# Lint code
+pnpm lint
+
+# Fix lint issues
+pnpm lint:fix
+```
+
+## CLI Usage
+
+```bash
+# Create new project
+ng-mobile init my-app --platform both
+
+# Run on platforms
+ng-mobile run android
+ng-mobile run ios
+
+# Build for platforms
+ng-mobile build android --release
+ng-mobile build ios --release
+
+# Start dev server
+ng-mobile start --port 8081
+
+# View logs
+ng-mobile logs android
+ng-mobile logs ios
+
+# List devices
+ng-mobile devices
+
+# Clean build artifacts
+ng-mobile clean
+```
+
+## Project Structure Guidelines
+
+### Adding a New Component
+
+1. Create component file: `src/components/my-widget/my-widget.component.ts`
+2. Export from: `src/components/components.module.ts`
+3. Export from: `src/index.ts`
+
+### Adding a New Service
+
+1. Create service file: `src/services/my-service.service.ts`
+2. Export from: `src/index.ts`
+3. Add to module providers if not `providedIn: 'root'`
+
+### Adding Platform-Specific Code
+
+- Android: `src/platforms/android/`
+- iOS: `src/platforms/ios/`
+- Shared: `src/core/platform/`
+
+## Code Quality
+
+### Pre-commit Hooks (Husky)
+
+The project uses Husky for pre-commit hooks:
+- Runs linting on staged files
+- Enforces conventional commits
+
+### Commit Message Format
+
+Follow conventional commits:
+```
+feat: add new animation type
+fix: resolve bridge connection issue
+docs: update component documentation
+chore: update dependencies
+refactor: simplify event handling
+test: add animation tests
+```
+
+## Debugging
+
+### Development Mode
+
+```typescript
+// Enable debug logging in bridge
+const bridge = new NativeBridge({
+  debug: true,
+  port: 8081,
+});
+```
+
+### Platform Detection
+
+```typescript
+import { Platform } from '@pegasusheavy/angular-platform-mobile';
+
+console.log('Platform:', Platform.detect()); // 'ios' | 'android'
+console.log('Is iOS:', Platform.isIOS);
+console.log('Is Android:', Platform.isAndroid);
+```
+
+## Release Process
+
+1. Update version in `package.json`
+2. Run `pnpm build`
+3. Run `pnpm test`
+4. Commit with `chore: release vX.Y.Z`
+5. Create git tag
+6. Publish to npm: `pnpm publish`

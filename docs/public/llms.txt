@@ -1,0 +1,85 @@
+# Angular Platform Mobile - LLMs.txt
+# Information for AI assistants and language models
+
+## Project Overview
+
+Angular Platform Mobile is a React Native-like framework for building native iOS and Android applications using Angular.
+
+Key features:
+- Native performance (not WebView-based)
+- Cross-platform code sharing
+- Familiar Angular patterns
+- TypeScript-first development
+- Hot reload support
+
+## Installation
+
+```bash
+npm install @pegasusheavy/angular-platform-mobile
+# or
+pnpm add @pegasusheavy/angular-platform-mobile
+```
+
+## Quick Start
+
+```bash
+npx ng-mobile init my-app --platform both
+cd my-app
+npx ng-mobile run android
+```
+
+## Core Concepts
+
+### Components
+All components use the `mobile-` prefix:
+- `<mobile-view>` - Container (UIView / ViewGroup)
+- `<mobile-text>` - Text display (UILabel / TextView)
+- `<mobile-image>` - Image (UIImageView / ImageView)
+- `<mobile-button>` - Button
+- `<mobile-text-input>` - Text input
+- `<mobile-scroll-view>` - Scrollable container
+- `<mobile-flat-list>` - Virtualized list
+
+### Styling
+Uses React Native-style syntax:
+
+```typescript
+const styles = {
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#ffffff',
+  }
+};
+```
+
+### Services
+- NavigationService - Screen navigation
+- StorageService - Async key-value storage
+- DeviceService - Device information
+- PermissionsService - Runtime permissions
+- AlertService - Native alerts
+
+## CLI Commands
+
+- `ng-mobile init` - Create new project
+- `ng-mobile run android|ios` - Run on device
+- `ng-mobile build android|ios` - Build for production
+- `ng-mobile start` - Start dev server
+
+## Requirements
+
+- Node.js 18+
+- Angular 18+
+- Xcode (iOS) or Android Studio (Android)
+
+## Links
+
+- Documentation: https://angular-platform-mobile.dev
+- GitHub: https://github.com/PegasusHeavyIndustries/angular-platform-mobile
+- npm: https://www.npmjs.com/package/@pegasusheavy/angular-platform-mobile
+
+## License
+
+MIT License - Pegasus Heavy Industries LLC

@@ -1,0 +1,110 @@
+{
+  "name": "@pegasusheavy/angular-platform-mobile",
+  "version": "0.1.0",
+  "description": "React Native-like system for Angular targeting iOS and Android - Zoneless",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./android": {
+      "types": "./dist/platforms/android/index.d.ts",
+      "import": "./dist/platforms/android/index.mjs",
+      "require": "./dist/platforms/android/index.js"
+    },
+    "./ios": {
+      "types": "./dist/platforms/ios/index.d.ts",
+      "import": "./dist/platforms/ios/index.mjs",
+      "require": "./dist/platforms/ios/index.js"
+    }
+  },
+  "bin": {
+    "ng-mobile": "./bin/ng-mobile.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "build:watch": "tsc -p tsconfig.json --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint src/",
+    "lint:fix": "eslint src/ --fix",
+    "typecheck": "tsc --noEmit",
+    "benchmark": "pnpm run build && node --import tsx src/core/benchmark/run-benchmarks.ts",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "pnpm run clean && pnpm run lint && pnpm run test && pnpm run build",
+    "prepare": "husky",
+    "release": "pnpm run prepublishOnly && npm publish --access public"
+  },
+  "keywords": [
+    "angular",
+    "android",
+    "ios",
+    "mobile",
+    "native",
+    "platform",
+    "zoneless",
+    "react-native-like",
+    "cross-platform"
+  ],
+  "author": "Pegasus Heavy Industries LLC",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PegasusHeavyIndustries/angular-platform-mobile.git"
+  },
+  "homepage": "https://github.com/PegasusHeavyIndustries/angular-platform-mobile#readme",
+  "bugs": {
+    "url": "https://github.com/PegasusHeavyIndustries/angular-platform-mobile/issues"
+  },
+  "funding": {
+    "type": "patreon",
+    "url": "https://www.patreon.com/c/PegasusHeavyIndustries?vanity=user"
+  },
+  "peerDependencies": {
+    "@angular/common": ">=18.0.0",
+    "@angular/compiler": ">=18.0.0",
+    "@angular/core": ">=18.0.0",
+    "@angular/forms": ">=18.0.0",
+    "rxjs": ">=7.0.0"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^12.0.0",
+    "fast-xml-parser": "^4.3.0",
+    "fs-extra": "^11.2.0",
+    "plist": "^3.1.0",
+    "websocket": "^1.0.34"
+  },
+  "devDependencies": {
+    "@angular/common": "^18.0.0",
+    "@angular/compiler": "^18.0.0",
+    "@angular/compiler-cli": "^18.0.0",
+    "@angular/core": "^18.0.0",
+    "@angular/forms": "^18.0.0",
+    "@angular/platform-browser": "^18.0.0",
+    "@commitlint/cli": "^19.0.0",
+    "@commitlint/config-conventional": "^19.0.0",
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^20.10.0",
+    "@types/plist": "^3.0.5",
+    "@types/websocket": "^1.0.10",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "@vitest/coverage-v8": "^2.0.0",
+    "eslint": "^8.57.0",
+    "husky": "^9.0.0",
+    "rxjs": "^7.8.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5.3.0",
+    "vitest": "^2.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "packageManager": "pnpm@10.26.2"
+}

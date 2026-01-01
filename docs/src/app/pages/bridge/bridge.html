@@ -1,0 +1,237 @@
+<h1>Native Bridge</h1>
+
+<p class="lead">
+  The Native Bridge handles all communication between your Angular application and
+  the native iOS/Android runtime. Understanding the bridge helps with debugging
+  and implementing custom native modules.
+</p>
+
+<h2>Architecture</h2>
+
+<p>The bridge uses different transport mechanisms depending on the environment:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Environment</th>
+      <th>Transport</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Development</td>
+      <td>WebSocket</td>
+      <td>Real-time bidirectional communication with hot reload</td>
+    </tr>
+    <tr>
+      <td>Android Production</td>
+      <td>JSInterface</td>
+      <td>Direct JavaScript-to-Java bridge</td>
+    </tr>
+    <tr>
+      <td>iOS Production</td>
+      <td>WKWebView / JSCore</td>
+      <td>Native JavaScript bridge via message handlers</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>BridgeService</h2>
+
+<p>The <code>BridgeService</code> is the primary way to interact with the native layer:</p>
+
+<pre><code>import &#123; BridgeService &#125; from '&#64;pegasusheavy/angular-platform-mobile';
+
+&#64;Component(&#123;...&#125;)
+export class MyComponent &#123;
+  constructor(private bridge: BridgeService) &#123;&#125;
+&#125;</code></pre>
+
+<h2>Sending Messages</h2>
+
+<h3>Fire-and-Forget</h3>
+<p>Send a message without waiting for a response:</p>
+
+<pre><code>await this.bridge.send('logEvent', &#123;
+  name: 'button_pressed',
+  params: &#123; screen: 'home' &#125;,
+&#125;);</code></pre>
+
+<h3>Request/Response</h3>
+<p>Send a message and wait for a response:</p>
+
+<pre><code>interface UserData &#123;
+  id: string;
+  name: string;
+  email: string;
+&#125;
+
+const user = await this.bridge.request&lt;UserData&gt;('getUserData', &#123;
+  userId: '123',
+&#125;);
+
+console.log('User:', user.name);</code></pre>
+
+<h2>Receiving Events</h2>
+
+<p>Subscribe to events from the native side:</p>
+
+<pre><code>import &#123; takeUntil &#125; from 'rxjs/operators';
+
+&#64;Component(&#123;...&#125;)
+export class LocationComponent implements OnInit, OnDestroy &#123;
+  private destroy$ = new Subject&lt;void&gt;();
+
+  constructor(private bridge: BridgeService) &#123;&#125;
+
+  ngOnInit() &#123;
+    // Subscribe to location updates
+    this.bridge.on&lt;&#123; latitude: number; longitude: number &#125;&gt;('locationUpdate')
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(location => &#123;
+        console.log('Location:', location.latitude, location.longitude);
+      &#125;);
+  &#125;
+
+  ngOnDestroy() &#123;
+    this.destroy$.next();
+    this.destroy$.complete();
+  &#125;
+&#125;</code></pre>
+
+<h2>View Operations</h2>
+
+<p>The bridge handles all native view operations:</p>
+
+<pre><code>// Create a native view
+const viewId = await this.bridge.createView('Button', &#123;
+  title: 'Press Me',
+  style: &#123; backgroundColor: '#dd0031' &#125;,
+&#125;);
+
+// Update view properties
+await this.bridge.updateView(viewId, &#123;
+  title: 'Updated Title',
+&#125;);
+
+// Remove the view
+await this.bridge.removeView(viewId);
+
+// Manage view hierarchy
+await this.bridge.appendChild(parentId, childId);
+await this.bridge.insertChild(parentId, childId, 2);
+await this.bridge.removeChild(parentId, childId);</code></pre>
+
+<h2>Calling Native Methods</h2>
+
+<p>Call methods on native modules:</p>
+
+<pre><code>// Call a method on a native module
+const result = await this.bridge.callNativeMethod&lt;string&gt;(
+  'FileManager',      // Module name
+  'readFile',         // Method name
+  ['/path/to/file']   // Arguments
+);
+
+console.log('File contents:', result);</code></pre>
+
+<h2>Connection State</h2>
+
+<p>Monitor the bridge connection state:</p>
+
+<pre><code>this.bridge.connectionState$.subscribe(state => &#123;
+  switch (state) &#123;
+    case 'connected':
+      console.log('Bridge connected');
+      break;
+    case 'connecting':
+      console.log('Bridge connecting...');
+      break;
+    case 'disconnected':
+      console.log('Bridge disconnected');
+      break;
+    case 'error':
+      console.log('Bridge error');
+      break;
+  &#125;
+&#125;);</code></pre>
+
+<h2>Debug Mode</h2>
+
+<p>Enable debug logging to see all bridge communication:</p>
+
+<pre><code>import &#123; bootstrapMobile &#125; from '&#64;pegasusheavy/angular-platform-mobile';
+
+bootstrapMobile(AppComponent, &#123;
+  config: &#123;
+    debug: true,  // Enable bridge logging
+  &#125;,
+&#125;);</code></pre>
+
+<p>With debug mode enabled, you'll see logs like:</p>
+
+<pre><code>[NativeBridge] Sending: createView
+[NativeBridge] Received: createView response
+[NativeBridge] Sending: updateView
+[NativeBridge] Received: viewEvent</code></pre>
+
+<h2>Custom Native Modules</h2>
+
+<p>Create custom native modules by implementing the native side:</p>
+
+<h3>TypeScript Interface</h3>
+
+<pre><code>// my-module.service.ts
+import &#123; Injectable &#125; from '&#64;angular/core';
+import &#123; BridgeService &#125; from '&#64;pegasusheavy/angular-platform-mobile';
+
+&#64;Injectable(&#123; providedIn: 'root' &#125;)
+export class MyModuleService &#123;
+  constructor(private bridge: BridgeService) &#123;&#125;
+
+  async doSomething(param: string): Promise&lt;string&gt; &#123;
+    return this.bridge.callNativeMethod&lt;string&gt;(
+      'MyModule',
+      'doSomething',
+      [param]
+    );
+  &#125;
+&#125;</code></pre>
+
+<h3>Android Implementation (Kotlin)</h3>
+
+<pre><code>// MyModule.kt
+class MyModule : NativeModule &#123;
+    override val name = "MyModule"
+
+    &#64;ReactMethod
+    fun doSomething(param: String, promise: Promise) &#123;
+        // Implementation
+        promise.resolve("Result: $param")
+    &#125;
+&#125;</code></pre>
+
+<h3>iOS Implementation (Swift)</h3>
+
+<pre><code>// MyModule.swift
+&#64;objc(MyModule)
+class MyModule: NSObject &#123;
+    &#64;objc static func moduleName() -> String! &#123;
+        return "MyModule"
+    &#125;
+
+    &#64;objc func doSomething(_ param: String,
+                          resolver: &#64;escaping RCTPromiseResolveBlock,
+                          rejecter: &#64;escaping RCTPromiseRejectBlock) &#123;
+        resolver("Result: \(param)")
+    &#125;
+&#125;</code></pre>
+
+<div class="info-box">
+  <h4>⚠️ Type Safety</h4>
+  <p>
+    All bridge communication must use JSON-serializable types. Complex objects
+    are automatically serialized. Functions cannot be passed across the bridge.
+  </p>
+</div>

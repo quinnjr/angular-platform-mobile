@@ -1,0 +1,118 @@
+<h1>Components</h1>
+
+<p class="lead">
+  Angular Platform Mobile provides a comprehensive set of native UI components that map
+  directly to platform-specific views. Each component is designed to look and feel native
+  on both iOS and Android.
+</p>
+
+<h2>Core Components</h2>
+
+<p>
+  These components form the foundation of your mobile UI. They correspond directly to
+  native views and provide full access to platform capabilities.
+</p>
+
+<div class="component-grid">
+  @for (component of components; track component.path) {
+    <a [routerLink]="component.path" class="component-card">
+      <div class="component-header">
+        <span class="component-icon">{{ component.icon }}</span>
+        <h3>{{ component.name }}</h3>
+      </div>
+      <p class="component-description">{{ component.description }}</p>
+      <div class="component-platforms">
+        @for (platform of component.platforms; track platform) {
+          <span class="badge" [class]="platform">{{ platform }}</span>
+        }
+      </div>
+    </a>
+  }
+</div>
+
+<h2>Component Naming</h2>
+
+<p>
+  All components use the <code>mobile-</code> prefix in their selectors:
+</p>
+
+<pre><code>&lt;!-- View component --&gt;
+&lt;mobile-view [style]="styles.container"&gt;
+
+  &lt;!-- Text component --&gt;
+  &lt;mobile-text [style]="styles.title"&gt;Hello World&lt;/mobile-text&gt;
+
+  &lt;!-- Button component --&gt;
+  &lt;mobile-button (press)="onPress()"&gt;Click Me&lt;/mobile-button&gt;
+
+&lt;/mobile-view&gt;</code></pre>
+
+<h2>Common Props</h2>
+
+<p>All components share these common properties:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Prop</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>style</code></td>
+      <td><code>ViewStyle | TextStyle | ImageStyle</code></td>
+      <td>Styling for the component</td>
+    </tr>
+    <tr>
+      <td><code>testID</code></td>
+      <td><code>string</code></td>
+      <td>Identifier for testing frameworks</td>
+    </tr>
+    <tr>
+      <td><code>accessible</code></td>
+      <td><code>boolean</code></td>
+      <td>Whether the component is accessible</td>
+    </tr>
+    <tr>
+      <td><code>accessibilityLabel</code></td>
+      <td><code>string</code></td>
+      <td>Label read by screen readers</td>
+    </tr>
+    <tr>
+      <td><code>accessibilityHint</code></td>
+      <td><code>string</code></td>
+      <td>Hint for what happens on interaction</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Importing Components</h2>
+
+<p>Import components from the main package:</p>
+
+<pre><code>import &#123;
+  ViewComponent,
+  TextComponent,
+  ImageComponent,
+  ButtonComponent,
+  TextInputComponent,
+  ScrollViewComponent,
+  FlatListComponent,
+  ModalComponent,
+  WebViewComponent,
+  SwitchComponent,
+  SliderComponent,
+  StatusBarComponent,
+  ActivityIndicatorComponent,
+&#125; from '&#64;pegasusheavy/angular-platform-mobile';</code></pre>
+
+<p>Or use the module that includes all components:</p>
+
+<pre><code>import &#123; MobileComponentsModule &#125; from '&#64;pegasusheavy/angular-platform-mobile';
+
+&#64;Component(&#123;
+  imports: [MobileComponentsModule],
+  // ...
+&#125;)</code></pre>

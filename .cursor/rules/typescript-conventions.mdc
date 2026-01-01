@@ -1,0 +1,86 @@
+# TypeScript Conventions
+
+## Strict Type Safety
+
+This project enforces strict TypeScript with NO `any` types allowed.
+
+### Forbidden Patterns
+```typescript
+// ❌ NEVER use any
+let data: any;
+const result = value as any;
+function process<T = any>(): T;
+
+// ✅ Use proper types instead
+let data: unknown;
+const result = value as SpecificType;
+function process<T = unknown>(): T;
+```
+
+### Type Definitions
+
+**For JSON-serializable data:**
+```typescript
+import { JsonValue, JsonObject, BridgePayload } from './core/bridge/native-bridge';
+
+// Use JsonValue for strict JSON
+const config: JsonValue = { key: 'value' };
+
+// Use BridgePayload for flexible objects
+const payload: BridgePayload = { anyKey: someValue };
+```
+
+**For native bridge communication:**
+```typescript
+// Generic request/response
+async request<T = unknown>(type: string, payload: BridgePayload): Promise<T>
+
+// Typed events
+on<T = unknown>(eventType: string, handler: EventHandler<T>): () => void
+```
+
+### Error Handling
+```typescript
+// ❌ Don't use any for errors
+catch (error: any) {
+  console.log(error.message);
+}
+
+// ✅ Use unknown and type guards
+catch (error: unknown) {
+  const err = error as { message?: string };
+  console.log(err.message ?? 'Unknown error');
+}
+```
+
+### Unused Parameters
+Prefix with underscore:
+```typescript
+function callback(_event: Event, _index: number): void {
+  // Parameters intentionally unused
+}
+```
+
+## Import Organization
+
+```typescript
+// 1. Angular core
+import { Component, Injectable } from '@angular/core';
+
+// 2. RxJS
+import { Observable, Subject } from 'rxjs';
+import { takeUntil, map } from 'rxjs/operators';
+
+// 3. Internal imports (relative)
+import { BridgeService } from '../../core/bridge/bridge.service';
+import { ViewStyle } from '../../types/style.types';
+```
+
+## Naming Conventions
+
+- **Classes**: PascalCase (`AndroidPlatform`, `NativeBridge`)
+- **Interfaces**: PascalCase, no `I` prefix (`PlatformOS`, `BridgeConfig`)
+- **Types**: PascalCase (`PlatformType`, `JsonValue`)
+- **Functions**: camelCase (`createView`, `transformStyle`)
+- **Constants**: SCREAMING_SNAKE_CASE (`PLATFORM_TYPE`, `NATIVE_COMPONENT_METADATA`)
+- **Files**: kebab-case (`native-bridge.ts`, `platform-android.ts`)

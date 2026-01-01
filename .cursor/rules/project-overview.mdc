@@ -1,0 +1,57 @@
+# Angular Platform Mobile - Project Overview
+
+## Project Description
+
+Angular Platform Mobile (`@pegasusheavy/angular-platform-mobile`) is a React Native-like framework for building native iOS and Android applications using Angular. It provides a bridge between Angular components and native mobile views.
+
+## Key Architecture
+
+### Platform Abstraction
+- `Platform` - Static utilities for platform detection (iOS/Android)
+- `BasePlatform` - Abstract base class for platform implementations
+- `AndroidPlatform` / `IOSPlatform` - Platform-specific implementations
+- `PLATFORM` / `PLATFORM_TYPE` - Injection tokens for DI
+
+### Native Bridge
+- `NativeBridge` - WebSocket/native bridge for JS-to-native communication
+- `BridgeService` - Angular service wrapper with lifecycle management
+- Supports: WebSocket (dev), Android JSInterface, iOS WKWebView/JavaScriptCore
+
+### Renderer
+- `AndroidRenderer` - Translates Angular updates to native view operations
+- `ViewRegistry` - Manages native view hierarchy
+- `EventDispatcher` - Routes native events to Angular handlers
+
+### Components
+All components use the `mobile-` prefix selector:
+- `mobile-view`, `mobile-text`, `mobile-image`
+- `mobile-button`, `mobile-text-input`, `mobile-scroll-view`
+- `mobile-flat-list`, `mobile-modal`, `mobile-webview`
+- `mobile-switch`, `mobile-slider`, `mobile-activity-indicator`
+
+## File Structure
+
+```
+src/
+├── components/       # Native component wrappers
+├── core/
+│   ├── animation/   # Animated API
+│   ├── bridge/      # Native bridge communication
+│   ├── platform/    # Platform abstraction
+│   └── runtime/     # Renderer and event system
+├── decorators/      # @NativeComponent, @NativeProp, etc.
+├── platforms/
+│   ├── android/     # Android-specific code
+│   └── ios/         # iOS-specific code
+├── services/        # Native API services
+├── types/           # Type definitions
+└── index.ts         # Public API exports
+```
+
+## CLI Tool
+
+The `ng-mobile` CLI provides:
+- `ng-mobile init` - Create new project
+- `ng-mobile run <platform>` - Run on device/emulator
+- `ng-mobile build <platform>` - Build for platform
+- `ng-mobile start` - Start dev server

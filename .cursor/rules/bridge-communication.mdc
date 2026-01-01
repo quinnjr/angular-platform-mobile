@@ -1,0 +1,134 @@
+# Native Bridge Communication
+
+## Bridge Architecture
+
+The native bridge supports three transport modes:
+1. **WebSocket** - Development mode
+2. **Android JSInterface** - Android native
+3. **iOS WKWebView/JSCore** - iOS native
+
+## Sending Messages
+
+### Fire-and-forget
+```typescript
+await this.bridgeService.send('eventType', {
+  viewId: this.viewId,
+  action: 'someAction',
+});
+```
+
+### Request/Response
+```typescript
+interface ResponseType {
+  success: boolean;
+  data: SomeData;
+}
+
+const result = await this.bridgeService.request<ResponseType>('requestType', {
+  param1: 'value',
+  param2: 123,
+});
+```
+
+## Receiving Events
+
+### Component Events
+```typescript
+// With target filtering
+this.bridgeService.on<{ value: number; target?: string }>('valueChange')
+  .pipe(takeUntil(this.destroy$))
+  .subscribe((event) => {
+    if (event.target === this.viewId) {
+      this.change.emit(event.value);
+    }
+  });
+```
+
+### Global Events
+```typescript
+// Platform-wide events (no target filtering needed)
+this.bridgeService.on<{ isConnected: boolean }>('networkChange')
+  .pipe(takeUntil(this.destroy$))
+  .subscribe(({ isConnected }) => {
+    this.handleNetworkChange(isConnected);
+  });
+```
+
+## Message Types
+
+### View Operations
+```typescript
+// Create view
+await bridge.send('createView', { viewId, viewType, props });
+
+// Update view
+await bridge.send('updateView', { viewId, props });
+
+// Remove view
+await bridge.send('removeView', { viewId });
+
+// View hierarchy
+await bridge.send('appendChild', { parentId, childId });
+await bridge.send('insertChild', { parentId, childId, index });
+await bridge.send('removeChild', { parentId, childId });
+```
+
+### Native Module Calls
+```typescript
+const result = await this.bridgeService.request<T>('callNativeMethod', {
+  module: 'ModuleName',
+  method: 'methodName',
+  args: [arg1, arg2],
+});
+```
+
+## Type-Safe Payloads
+
+Always use typed payloads, never `any`:
+
+```typescript
+// ❌ Don't do this
+await bridge.send('action', data as any);
+
+// ✅ Define proper types
+interface ActionPayload {
+  viewId: string;
+  action: string;
+  params?: Record<string, unknown>;
+}
+
+await bridge.send('action', payload satisfies ActionPayload);
+```
+
+## Error Handling
+
+```typescript
+try {
+  const result = await this.bridgeService.request<ResponseType>('riskyAction', {});
+  return result;
+} catch (error: unknown) {
+  const err = error as { message?: string; code?: string };
+
+  if (err.code === 'TIMEOUT') {
+    // Handle timeout
+  } else {
+    // Handle other errors
+  }
+
+  throw error;
+}
+```
+
+## Platform Detection in Bridge
+
+```typescript
+const bridge = new NativeBridge({
+  port: 8081,
+  debug: true,
+  platform: 'ios', // Force platform (optional)
+});
+
+// Auto-detected transport
+console.log(bridge.currentTransport); // 'native-ios' | 'native-android' | 'websocket'
+console.log(bridge.currentPlatform);  // 'ios' | 'android'
+```

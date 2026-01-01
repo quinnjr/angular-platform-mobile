@@ -1,0 +1,302 @@
+<h1>Styling</h1>
+
+<p class="lead">
+  Angular Platform Mobile uses a React Native-like styling system based on Flexbox.
+  Styles are defined as JavaScript objects and applied directly to native views.
+</p>
+
+<h2>StyleSheet</h2>
+
+<p>
+  Use <code>StyleSheet.create()</code> to define reusable styles with type checking
+  and optimization:
+</p>
+
+<pre><code>import &#123; StyleSheet &#125; from '&#64;pegasusheavy/angular-platform-mobile';
+
+const styles = StyleSheet.create(&#123;
+  container: &#123;
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#ffffff',
+  &#125;,
+  title: &#123;
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#1a1a1a',
+    marginBottom: 16,
+  &#125;,
+  button: &#123;
+    backgroundColor: '#dd0031',
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 8,
+  &#125;,
+&#125;);</code></pre>
+
+<h2>Style Types</h2>
+
+<h3>ViewStyle</h3>
+
+<p>Used for container components like <code>mobile-view</code>:</p>
+
+<pre><code>const viewStyle: ViewStyle = &#123;
+  // Flexbox
+  flex: 1,
+  flexDirection: 'row',      // 'row' | 'column' | 'row-reverse' | 'column-reverse'
+  justifyContent: 'center',  // 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around'
+  alignItems: 'center',      // 'flex-start' | 'flex-end' | 'center' | 'stretch' | 'baseline'
+  flexWrap: 'wrap',          // 'wrap' | 'nowrap' | 'wrap-reverse'
+
+  // Dimensions
+  width: 100,
+  height: 200,
+  minWidth: 50,
+  maxWidth: '100%',
+  aspectRatio: 16 / 9,
+
+  // Spacing
+  padding: 16,
+  paddingVertical: 8,
+  paddingHorizontal: 12,
+  margin: 8,
+  marginTop: 16,
+
+  // Background
+  backgroundColor: '#ffffff',
+  opacity: 0.9,
+
+  // Border
+  borderWidth: 1,
+  borderColor: '#cccccc',
+  borderRadius: 8,
+  borderTopLeftRadius: 16,
+
+  // Position
+  position: 'absolute',      // 'relative' | 'absolute'
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  zIndex: 10,
+
+  // Shadow (iOS)
+  shadowColor: '#000000',
+  shadowOffset: &#123; width: 0, height: 2 &#125;,
+  shadowOpacity: 0.25,
+  shadowRadius: 4,
+
+  // Shadow (Android)
+  elevation: 4,
+
+  // Transforms
+  transform: [
+    &#123; translateX: 10 &#125;,
+    &#123; rotate: '45deg' &#125;,
+    &#123; scale: 1.2 &#125;,
+  ],
+&#125;;</code></pre>
+
+<h3>TextStyle</h3>
+
+<p>Used for text components:</p>
+
+<pre><code>const textStyle: TextStyle = &#123;
+  // Font
+  fontSize: 16,
+  fontWeight: 'bold',        // 'normal' | 'bold' | '100'-'900'
+  fontFamily: 'Roboto',
+  fontStyle: 'italic',       // 'normal' | 'italic'
+
+  // Color
+  color: '#333333',
+
+  // Alignment
+  textAlign: 'center',       // 'auto' | 'left' | 'right' | 'center' | 'justify'
+
+  // Spacing
+  lineHeight: 24,
+  letterSpacing: 0.5,
+
+  // Decoration
+  textDecorationLine: 'underline',  // 'none' | 'underline' | 'line-through'
+  textDecorationColor: '#dd0031',
+  textDecorationStyle: 'solid',
+
+  // Transform
+  textTransform: 'uppercase',  // 'none' | 'uppercase' | 'lowercase' | 'capitalize'
+
+  // Shadow
+  textShadowColor: '#000000',
+  textShadowOffset: &#123; width: 1, height: 1 &#125;,
+  textShadowRadius: 2,
+&#125;;</code></pre>
+
+<h3>ImageStyle</h3>
+
+<p>Used for image components:</p>
+
+<pre><code>const imageStyle: ImageStyle = &#123;
+  width: 200,
+  height: 200,
+  resizeMode: 'cover',     // 'cover' | 'contain' | 'stretch' | 'center' | 'repeat'
+  borderRadius: 100,       // Circular image
+  tintColor: '#dd0031',    // Color overlay
+&#125;;</code></pre>
+
+<h2>Dynamic Styles</h2>
+
+<h3>Conditional Styles</h3>
+
+<p>Combine styles conditionally using arrays or spread operators:</p>
+
+<pre><code>&#64;Component(&#123;
+  template: \`
+    &lt;mobile-view [style]="getContainerStyle()"&gt;
+      &lt;mobile-text [style]="[styles.text, isActive && styles.activeText]"&gt;
+        Status
+      &lt;/mobile-text&gt;
+    &lt;/mobile-view&gt;
+  \`,
+&#125;)
+export class StatusComponent &#123;
+  isActive = false;
+  isError = false;
+
+  styles = StyleSheet.create(&#123;
+    container: &#123;
+      padding: 16,
+      backgroundColor: '#ffffff',
+    &#125;,
+    containerActive: &#123;
+      backgroundColor: '#e8f5e9',
+    &#125;,
+    containerError: &#123;
+      backgroundColor: '#ffebee',
+    &#125;,
+    text: &#123;
+      fontSize: 16,
+      color: '#666666',
+    &#125;,
+    activeText: &#123;
+      color: '#4caf50',
+      fontWeight: 'bold',
+    &#125;,
+  &#125;);
+
+  getContainerStyle() &#123;
+    return [
+      this.styles.container,
+      this.isActive && this.styles.containerActive,
+      this.isError && this.styles.containerError,
+    ];
+  &#125;
+&#125;</code></pre>
+
+<h3>StyleService</h3>
+
+<p>Use the <code>StyleService</code> for advanced styling features:</p>
+
+<pre><code>import &#123; StyleService &#125; from '&#64;pegasusheavy/angular-platform-mobile';
+
+&#64;Component(&#123;...&#125;)
+export class MyComponent &#123;
+  private styleService = inject(StyleService);
+
+  // Use presets
+  containerStyle = &#123;
+    ...this.styleService.presets.flex1,
+    ...this.styleService.presets.center,
+    ...this.styleService.presets.shadow,
+  &#125;;
+
+  // Create responsive styles
+  responsiveText = this.styleService.responsive(
+    &#123; fontSize: 14 &#125;,        // Base
+    &#123;
+      sm: &#123; fontSize: 16 &#125;,  // >= 320px
+      md: &#123; fontSize: 18 &#125;,  // >= 480px
+      lg: &#123; fontSize: 20 &#125;,  // >= 768px
+    &#125;
+  );
+
+  // Create themed styles
+  themedStyles = this.styleService.themed(
+    &#123; container: &#123; backgroundColor: '#ffffff' &#125; &#125;,  // Light
+    &#123; container: &#123; backgroundColor: '#1a1a1a' &#125; &#125;   // Dark
+  );
+&#125;</code></pre>
+
+<h2>Platform-Specific Styles</h2>
+
+<p>Use <code>Platform.select()</code> for platform-specific styling:</p>
+
+<pre><code>import &#123; Platform, StyleSheet &#125; from '&#64;pegasusheavy/angular-platform-mobile';
+
+const styles = StyleSheet.create(&#123;
+  button: &#123;
+    padding: 12,
+    borderRadius: Platform.select(&#123;
+      ios: 10,
+      android: 4,
+    &#125;),
+    ...Platform.select(&#123;
+      ios: &#123;
+        shadowColor: '#000',
+        shadowOffset: &#123; width: 0, height: 2 &#125;,
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+      &#125;,
+      android: &#123;
+        elevation: 4,
+      &#125;,
+    &#125;),
+  &#125;,
+&#125;);</code></pre>
+
+<h2>Flexbox Guide</h2>
+
+<p>
+  The layout system is based on Flexbox with <code>flexDirection: 'column'</code> as the default
+  (unlike web CSS which defaults to row).
+</p>
+
+<div class="flex-examples">
+  <div class="flex-example">
+    <h4>Row Layout</h4>
+    <pre><code>&#123;
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+&#125;</code></pre>
+    <div class="flex-preview row space-between">
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+    </div>
+  </div>
+
+  <div class="flex-example">
+    <h4>Column Centered</h4>
+    <pre><code>&#123;
+  flexDirection: 'column',
+  alignItems: 'center',
+&#125;</code></pre>
+    <div class="flex-preview column center">
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+    </div>
+  </div>
+
+  <div class="flex-example">
+    <h4>Flex Grow</h4>
+    <pre><code>// Child with flex: 1
+&#123; flex: 1 &#125;</code></pre>
+    <div class="flex-preview row">
+      <div class="box"></div>
+      <div class="box flex-1"></div>
+      <div class="box"></div>
+    </div>
+  </div>
+</div>

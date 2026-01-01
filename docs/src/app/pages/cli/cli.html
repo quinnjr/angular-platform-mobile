@@ -1,0 +1,320 @@
+<h1>CLI Reference</h1>
+
+<p class="lead">
+  The <code>ng-mobile</code> CLI provides commands for creating, building, and running
+  Angular Platform Mobile applications.
+</p>
+
+<h2>Installation</h2>
+
+<p>The CLI is included with the package and can be used via npx or installed globally:</p>
+
+<pre><code># Use via npx (recommended)
+npx ng-mobile &lt;command&gt;
+
+# Or install globally
+pnpm add -g &#64;pegasusheavy/angular-platform-mobile
+ng-mobile &lt;command&gt;</code></pre>
+
+<h2>Commands</h2>
+
+<h3 id="init">ng-mobile init</h3>
+
+<p>Create a new Angular Platform Mobile project or add mobile support to an existing project.</p>
+
+<pre><code># Create new project
+ng-mobile init my-app
+
+# Create with specific platforms
+ng-mobile init my-app --platform android
+ng-mobile init my-app --platform ios
+ng-mobile init my-app --platform both
+
+# Add to existing Angular project
+ng-mobile init --existing</code></pre>
+
+<table>
+  <thead>
+    <tr>
+      <th>Option</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>--platform</code></td>
+      <td>Target platform(s): android, ios, or both</td>
+      <td>both</td>
+    </tr>
+    <tr>
+      <td><code>--existing</code></td>
+      <td>Add mobile support to existing project</td>
+      <td>false</td>
+    </tr>
+    <tr>
+      <td><code>--skip-install</code></td>
+      <td>Skip dependency installation</td>
+      <td>false</td>
+    </tr>
+    <tr>
+      <td><code>--package-manager</code></td>
+      <td>Package manager to use: pnpm, npm, yarn</td>
+      <td>pnpm</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="run">ng-mobile run</h3>
+
+<p>Build and run the application on a device or emulator.</p>
+
+<pre><code># Run on Android
+ng-mobile run android
+
+# Run on iOS
+ng-mobile run ios
+
+# Run on specific device
+ng-mobile run android --device "Pixel 7"
+ng-mobile run ios --simulator "iPhone 15 Pro"
+
+# Run release build
+ng-mobile run android --release</code></pre>
+
+<table>
+  <thead>
+    <tr>
+      <th>Option</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>--device</code></td>
+      <td>Target device name</td>
+      <td>auto</td>
+    </tr>
+    <tr>
+      <td><code>--simulator</code></td>
+      <td>iOS Simulator name (iOS only)</td>
+      <td>auto</td>
+    </tr>
+    <tr>
+      <td><code>--release</code></td>
+      <td>Build in release mode</td>
+      <td>false</td>
+    </tr>
+    <tr>
+      <td><code>--no-build</code></td>
+      <td>Skip build step (use existing build)</td>
+      <td>false</td>
+    </tr>
+    <tr>
+      <td><code>--port</code></td>
+      <td>Dev server port</td>
+      <td>8081</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="build">ng-mobile build</h3>
+
+<p>Build the application for distribution.</p>
+
+<pre><code># Debug build
+ng-mobile build android
+ng-mobile build ios
+
+# Release build
+ng-mobile build android --release
+ng-mobile build ios --release
+
+# Build APK (Android)
+ng-mobile build android --apk
+
+# Build AAB for Play Store (Android)
+ng-mobile build android --aab --release
+
+# Build for App Store (iOS)
+ng-mobile build ios --release --archive</code></pre>
+
+<table>
+  <thead>
+    <tr>
+      <th>Option</th>
+      <th>Description</th>
+      <th>Platform</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>--release</code></td>
+      <td>Build in release mode</td>
+      <td>Both</td>
+    </tr>
+    <tr>
+      <td><code>--apk</code></td>
+      <td>Build APK file</td>
+      <td>Android</td>
+    </tr>
+    <tr>
+      <td><code>--aab</code></td>
+      <td>Build Android App Bundle</td>
+      <td>Android</td>
+    </tr>
+    <tr>
+      <td><code>--archive</code></td>
+      <td>Create Xcode archive</td>
+      <td>iOS</td>
+    </tr>
+    <tr>
+      <td><code>--configuration</code></td>
+      <td>Angular build configuration</td>
+      <td>Both</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="start">ng-mobile start</h3>
+
+<p>Start the development server with hot reload.</p>
+
+<pre><code># Start dev server
+ng-mobile start
+
+# Start on specific port
+ng-mobile start --port 8082
+
+# Start with verbose logging
+ng-mobile start --verbose</code></pre>
+
+<table>
+  <thead>
+    <tr>
+      <th>Option</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>--port</code></td>
+      <td>Server port</td>
+      <td>8081</td>
+    </tr>
+    <tr>
+      <td><code>--host</code></td>
+      <td>Server host</td>
+      <td>localhost</td>
+    </tr>
+    <tr>
+      <td><code>--verbose</code></td>
+      <td>Enable verbose logging</td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="devices">ng-mobile devices</h3>
+
+<p>List available devices and emulators.</p>
+
+<pre><code># List all devices
+ng-mobile devices
+
+# List Android devices only
+ng-mobile devices --android
+
+# List iOS devices only
+ng-mobile devices --ios</code></pre>
+
+<h3 id="logs">ng-mobile logs</h3>
+
+<p>View device logs in real-time.</p>
+
+<pre><code># View Android logs
+ng-mobile logs android
+
+# View iOS logs
+ng-mobile logs ios
+
+# Filter logs
+ng-mobile logs android --filter "MyApp"</code></pre>
+
+<h3 id="clean">ng-mobile clean</h3>
+
+<p>Clean build artifacts and caches.</p>
+
+<pre><code># Clean all
+ng-mobile clean
+
+# Clean specific platform
+ng-mobile clean android
+ng-mobile clean ios</code></pre>
+
+<h2>Environment Variables</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Variable</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>ANDROID_HOME</code></td>
+      <td>Path to Android SDK</td>
+    </tr>
+    <tr>
+      <td><code>JAVA_HOME</code></td>
+      <td>Path to Java JDK</td>
+    </tr>
+    <tr>
+      <td><code>NG_MOBILE_PORT</code></td>
+      <td>Default dev server port</td>
+    </tr>
+    <tr>
+      <td><code>NG_MOBILE_DEBUG</code></td>
+      <td>Enable debug output</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Configuration</h2>
+
+<p>Project configuration is stored in <code>angular.json</code>:</p>
+
+<pre><code>&#123;
+  "projects": &#123;
+    "my-app": &#123;
+      "architect": &#123;
+        "mobile": &#123;
+          "builder": "&#64;pegasusheavy/angular-platform-mobile:build",
+          "options": &#123;
+            "platforms": ["android", "ios"],
+            "androidOptions": &#123;
+              "minSdkVersion": 24,
+              "targetSdkVersion": 34,
+              "compileSdkVersion": 34
+            &#125;,
+            "iosOptions": &#123;
+              "deploymentTarget": "15.0",
+              "deviceFamily": ["iphone", "ipad"]
+            &#125;
+          &#125;
+        &#125;
+      &#125;
+    &#125;
+  &#125;
+&#125;</code></pre>
+
+<div class="info-box">
+  <h4>💡 Tip</h4>
+  <p>
+    Use <code>ng-mobile --help</code> for a full list of commands, or
+    <code>ng-mobile &lt;command&gt; --help</code> for detailed command options.
+  </p>
+</div>

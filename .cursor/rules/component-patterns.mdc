@@ -1,0 +1,136 @@
+# Component Development Patterns
+
+## Creating Native Components
+
+### Basic Structure
+```typescript
+import { Component, Input, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
+import { NativeComponent } from '../../decorators/native-component';
+import { BridgeService, ViewProps } from '../../core/bridge/bridge.service';
+import { ViewStyle } from '../../types/style.types';
+
+@NativeComponent({
+  nativeViewClass: 'android.widget.WidgetName', // Android class
+  hasChildren: false,
+  events: ['press', 'change'],
+})
+@Component({
+  selector: 'mobile-widget-name',
+  template: `<ng-content></ng-content>`,
+  standalone: true,
+})
+export class WidgetComponent implements OnInit, OnDestroy {
+  private viewId: string | null = null;
+
+  @Input() style?: ViewStyle;
+  @Output() press = new EventEmitter<void>();
+
+  constructor(private readonly bridgeService: BridgeService) {}
+
+  async ngOnInit(): Promise<void> {
+    this.viewId = await this.bridgeService.createView('Widget', this.getProps());
+    this.registerEventListeners();
+  }
+
+  ngOnDestroy(): void {
+    if (this.viewId) {
+      void this.bridgeService.removeView(this.viewId);
+    }
+  }
+
+  private getProps(): ViewProps {
+    return {
+      style: this.style as unknown as JsonValue,
+      // ... other props
+    };
+  }
+
+  private registerEventListeners(): void {
+    if (!this.viewId) return;
+    // Register bridge event listeners
+  }
+}
+```
+
+### Component Selectors
+All component selectors use the `mobile-` prefix:
+- `mobile-view`, `mobile-text`, `mobile-image`
+- `mobile-button`, `mobile-scroll-view`, `mobile-flat-list`
+
+### Props Pattern
+```typescript
+// Style props
+@Input() style?: ViewStyle;
+@Input() contentContainerStyle?: ViewStyle;
+
+// Behavior props
+@Input() disabled?: boolean;
+@Input() accessible?: boolean;
+
+// Test props
+@Input() testID?: string;
+```
+
+### Event Pattern
+```typescript
+// Define event type with target
+interface WidgetEvent {
+  target?: string;
+  value: number;
+}
+
+// Register typed event listener
+this.bridgeService.on<WidgetEvent>('widgetChange').subscribe((event) => {
+  if (event.target === this.viewId) {
+    this.change.emit(event);
+  }
+});
+```
+
+## ControlValueAccessor Implementation
+
+For form-compatible components:
+```typescript
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+
+@Component({
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => TextInputComponent),
+    multi: true,
+  }],
+})
+export class TextInputComponent implements ControlValueAccessor {
+  private onChange: (value: string) => void = () => {};
+  private onTouched: () => void = () => {};
+
+  writeValue(value: string): void {
+    this.value = value ?? '';
+  }
+
+  registerOnChange(fn: (value: string) => void): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+    this.editable = !isDisabled;
+  }
+}
+```
+
+## Platform-Specific Code
+
+Use Platform.select for platform differences:
+```typescript
+import { Platform } from '../../core/platform/platform';
+
+const buttonStyle = Platform.select({
+  ios: { borderRadius: 8 },
+  android: { elevation: 2 },
+  default: {},
+});
+```

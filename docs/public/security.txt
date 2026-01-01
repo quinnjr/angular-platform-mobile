@@ -1,0 +1,9 @@
+# Angular Platform Mobile Security Policy
+# https://angular-platform-mobile.dev/.well-known/security.txt
+
+Contact: mailto:security@pegasusheavy.com
+Contact: https://github.com/PegasusHeavyIndustries/angular-platform-mobile/security/advisories
+Expires: 2027-01-01T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://angular-platform-mobile.dev/.well-known/security.txt
+Policy: https://github.com/PegasusHeavyIndustries/angular-platform-mobile/security/policy

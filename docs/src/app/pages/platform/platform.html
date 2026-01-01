@@ -1,0 +1,221 @@
+<h1>Platform APIs</h1>
+
+<p class="lead">
+  The Platform module provides utilities for detecting the current platform,
+  accessing platform-specific information, and writing conditional code for iOS and Android.
+</p>
+
+<h2>Platform Detection</h2>
+
+<pre><code>import &#123; Platform &#125; from '&#64;pegasusheavy/angular-platform-mobile';
+
+// Check current platform
+if (Platform.isIOS) &#123;
+  console.log('Running on iOS');
+&#125;
+
+if (Platform.isAndroid) &#123;
+  console.log('Running on Android');
+&#125;
+
+// Get platform type
+const platformType = Platform.detect(); // 'ios' | 'android'</code></pre>
+
+<h2>Platform.select()</h2>
+
+<p>Return different values based on the current platform:</p>
+
+<pre><code>// Simple values
+const fontSize = Platform.select(&#123;
+  ios: 17,
+  android: 16,
+  default: 16,
+&#125;);
+
+// Objects
+const buttonStyle = Platform.select(&#123;
+  ios: &#123;
+    borderRadius: 10,
+    paddingVertical: 12,
+  &#125;,
+  android: &#123;
+    borderRadius: 4,
+    paddingVertical: 14,
+    elevation: 2,
+  &#125;,
+&#125;);
+
+// Spread into styles
+const styles = StyleSheet.create(&#123;
+  container: &#123;
+    flex: 1,
+    ...Platform.select(&#123;
+      ios: &#123; paddingTop: 44 &#125;,
+      android: &#123; paddingTop: 24 &#125;,
+    &#125;),
+  &#125;,
+&#125;);</code></pre>
+
+<h2>Platform Constants</h2>
+
+<p>Access platform-specific information through the Platform service:</p>
+
+<pre><code>import &#123; PLATFORM, IPlatform &#125; from '&#64;pegasusheavy/angular-platform-mobile';
+
+&#64;Component(&#123;...&#125;)
+export class DeviceInfoComponent &#123;
+  constructor(&#64;Inject(PLATFORM) private platform: IPlatform) &#123;&#125;
+
+  ngOnInit() &#123;
+    // OS information
+    console.log('OS:', this.platform.OS.type);           // 'ios' | 'android'
+    console.log('Version:', this.platform.OS.version);   // '17.0' or '14'
+    console.log('Version Number:', this.platform.OS.versionNumber); // 17 or 14
+    console.log('Model:', this.platform.OS.model);       // 'iPhone 15 Pro'
+    console.log('Is Tablet:', this.platform.OS.isTablet);
+
+    // Platform constants
+    console.log('Is Debugging:', this.platform.constants.isDebugging);
+    console.log('Is RTL:', this.platform.constants.isRTL);
+
+    // Android-specific
+    if (this.platform.constants.android) &#123;
+      console.log('API Level:', this.platform.constants.android.apiLevel);
+      console.log('SDK Int:', this.platform.constants.android.sdkInt);
+    &#125;
+
+    // iOS-specific
+    if (this.platform.constants.ios) &#123;
+      console.log('System Name:', this.platform.constants.ios.systemName);
+      console.log('Idiom:', this.platform.constants.ios.interfaceIdiom);
+      console.log('Is Simulator:', this.platform.constants.ios.isSimulator);
+    &#125;
+  &#125;
+&#125;</code></pre>
+
+<h2>Reactive Platform Data</h2>
+
+<p>Subscribe to platform changes like dimensions and color scheme:</p>
+
+<pre><code>&#64;Component(&#123;...&#125;)
+export class ResponsiveComponent implements OnInit, OnDestroy &#123;
+  private destroy$ = new Subject&lt;void&gt;();
+
+  constructor(&#64;Inject(PLATFORM) private platform: IPlatform) &#123;&#125;
+
+  ngOnInit() &#123;
+    // Window/screen dimensions
+    this.platform.dimensions$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(dims => &#123;
+        console.log('Window:', dims.window.width, 'x', dims.window.height);
+        console.log('Screen:', dims.screen.width, 'x', dims.screen.height);
+        console.log('Scale:', dims.window.scale);
+      &#125;);
+
+    // Color scheme (light/dark mode)
+    this.platform.colorScheme$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(scheme => &#123;
+        console.log('Color Scheme:', scheme); // 'light' | 'dark' | 'no-preference'
+      &#125;);
+
+    // Safe area insets
+    this.platform.safeAreaInsets$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(insets => &#123;
+        console.log('Safe Area:', insets); // &#123; top, right, bottom, left &#125;
+      &#125;);
+  &#125;
+
+  ngOnDestroy() &#123;
+    this.destroy$.next();
+    this.destroy$.complete();
+  &#125;
+&#125;</code></pre>
+
+<h2>Version Checking</h2>
+
+<p>Check for minimum OS version support:</p>
+
+<pre><code>&#64;Component(&#123;...&#125;)
+export class FeatureComponent &#123;
+  constructor(&#64;Inject(PLATFORM) private platform: IPlatform) &#123;&#125;
+
+  checkFeatureSupport() &#123;
+    // Check if iOS 15+ or Android 12+
+    if (this.platform.isVersionAtLeast(this.platform.isIOS ? 15 : 31)) &#123;
+      // Use modern APIs
+      this.enableModernFeature();
+    &#125; else &#123;
+      // Fallback for older OS
+      this.useLegacyFeature();
+    &#125;
+  &#125;
+&#125;</code></pre>
+
+<h2>Safe Area Handling</h2>
+
+<p>Handle notches, home indicators, and rounded corners:</p>
+
+<pre><code>&#64;Component(&#123;
+  template: \`
+    &lt;mobile-view [style]="getContainerStyle()"&gt;
+      &lt;!-- Content is safe from notches and indicators --&gt;
+      &lt;ng-content&gt;&lt;/ng-content&gt;
+    &lt;/mobile-view&gt;
+  \`,
+&#125;)
+export class SafeAreaContainer &#123;
+  insets = &#123; top: 0, bottom: 0, left: 0, right: 0 &#125;;
+
+  constructor(&#64;Inject(PLATFORM) private platform: IPlatform) &#123;
+    this.platform.safeAreaInsets$.subscribe(insets => &#123;
+      this.insets = insets;
+    &#125;);
+  &#125;
+
+  getContainerStyle() &#123;
+    return &#123;
+      flex: 1,
+      paddingTop: this.insets.top,
+      paddingBottom: this.insets.bottom,
+      paddingLeft: this.insets.left,
+      paddingRight: this.insets.right,
+    &#125;;
+  &#125;
+&#125;</code></pre>
+
+<h2>Dark Mode Support</h2>
+
+<p>Respond to system color scheme changes:</p>
+
+<pre><code>&#64;Component(&#123;...&#125;)
+export class ThemedComponent &#123;
+  isDarkMode = false;
+
+  constructor(&#64;Inject(PLATFORM) private platform: IPlatform) &#123;
+    this.platform.colorScheme$.subscribe(scheme => &#123;
+      this.isDarkMode = scheme === 'dark';
+    &#125;);
+  &#125;
+
+  get styles() &#123;
+    return StyleSheet.create(&#123;
+      container: &#123;
+        backgroundColor: this.isDarkMode ? '#1a1a1a' : '#ffffff',
+      &#125;,
+      text: &#123;
+        color: this.isDarkMode ? '#ffffff' : '#1a1a1a',
+      &#125;,
+    &#125;);
+  &#125;
+&#125;</code></pre>
+
+<div class="info-box">
+  <h4>💡 Dependency Injection</h4>
+  <p>
+    Use the <code>PLATFORM</code> injection token to get the platform instance.
+    This allows for proper testing and platform mocking in unit tests.
+  </p>
+</div>

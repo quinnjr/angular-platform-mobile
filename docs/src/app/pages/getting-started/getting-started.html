@@ -1,0 +1,224 @@
+<h1>Getting Started</h1>
+
+<p class="lead">
+  Get up and running with Angular Platform Mobile in just a few minutes.
+  This guide covers installation, project setup, and building your first native app.
+</p>
+
+<h2>Prerequisites</h2>
+
+<p>Before you begin, ensure you have the following installed:</p>
+
+<ul>
+  <li><strong>Node.js</strong> 18.0.0 or later</li>
+  <li><strong>pnpm</strong> (recommended) or npm</li>
+  <li><strong>Angular CLI</strong> 18.0.0 or later</li>
+  <li><strong>For Android:</strong> Android Studio with SDK 24+</li>
+  <li><strong>For iOS:</strong> Xcode 15+ (macOS only)</li>
+</ul>
+
+<h2>Installation</h2>
+
+<h3>Create a New Project</h3>
+
+<p>The fastest way to get started is using our CLI:</p>
+
+<pre><code># Create a new project
+npx ng-mobile init my-app
+
+# Navigate to the project
+cd my-app
+
+# Install dependencies
+pnpm install</code></pre>
+
+<h3>Add to Existing Angular Project</h3>
+
+<p>You can also add Angular Platform Mobile to an existing Angular project:</p>
+
+<pre><code># Install the package
+pnpm add &#64;pegasusheavy/angular-platform-mobile
+
+# Initialize mobile platform
+npx ng-mobile init --existing</code></pre>
+
+<h2>Project Structure</h2>
+
+<p>After initialization, your project will have the following structure:</p>
+
+<pre><code>my-app/
+├── android/              # Android native project
+│   ├── app/
+│   │   └── src/main/
+│   └── build.gradle
+├── ios/                  # iOS native project (macOS only)
+│   ├── MyApp/
+│   └── MyApp.xcodeproj
+├── src/
+│   ├── app/
+│   │   ├── app.component.ts
+│   │   └── app.module.ts
+│   ├── main.ts
+│   └── styles.ts
+├── package.json
+└── angular.json</code></pre>
+
+<h2>Your First App</h2>
+
+<h3>Bootstrap the Application</h3>
+
+<p>Update your <code>main.ts</code> to use the mobile bootstrap:</p>
+
+<pre><code>import &#123; bootstrapMobile &#125; from '&#64;pegasusheavy/angular-platform-mobile';
+import &#123; AppComponent &#125; from './app/app.component';
+
+bootstrapMobile(AppComponent, &#123;
+  config: &#123;
+    debug: true,
+    hotReload: true,
+  &#125;,
+&#125;).catch(err => console.error(err));</code></pre>
+
+<h3>Create Your First Component</h3>
+
+<p>Replace your app component with native mobile components:</p>
+
+<pre><code>import &#123; Component &#125; from '&#64;angular/core';
+import &#123;
+  ViewComponent,
+  TextComponent,
+  ButtonComponent,
+  StyleSheet,
+&#125; from '&#64;pegasusheavy/angular-platform-mobile';
+
+&#64;Component(&#123;
+  selector: 'app-root',
+  standalone: true,
+  imports: [ViewComponent, TextComponent, ButtonComponent],
+  template: \`
+    &lt;mobile-view [style]="styles.container"&gt;
+      &lt;mobile-text [style]="styles.title"&gt;
+        Welcome to Angular Mobile!
+      &lt;/mobile-text&gt;
+
+      &lt;mobile-text [style]="styles.subtitle"&gt;
+        Build native apps with Angular
+      &lt;/mobile-text&gt;
+
+      &lt;mobile-button
+        [style]="styles.button"
+        (press)="onButtonPress()"&gt;
+        Get Started
+      &lt;/mobile-button&gt;
+    &lt;/mobile-view&gt;
+  \`,
+&#125;)
+export class AppComponent &#123;
+  styles = StyleSheet.create(&#123;
+    container: &#123;
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: '#ffffff',
+      padding: 20,
+    &#125;,
+    title: &#123;
+      fontSize: 28,
+      fontWeight: 'bold',
+      color: '#1a1a1a',
+      marginBottom: 8,
+    &#125;,
+    subtitle: &#123;
+      fontSize: 16,
+      color: '#666666',
+      marginBottom: 32,
+    &#125;,
+    button: &#123;
+      backgroundColor: '#dd0031',
+      paddingVertical: 14,
+      paddingHorizontal: 32,
+      borderRadius: 8,
+    &#125;,
+  &#125;);
+
+  onButtonPress(): void &#123;
+    console.log('Button pressed!');
+  &#125;
+&#125;</code></pre>
+
+<h2>Running Your App</h2>
+
+<h3>Development Mode</h3>
+
+<p>Start the development server with hot reload:</p>
+
+<pre><code># Start the dev server
+pnpm start
+
+# Or use the CLI
+npx ng-mobile start</code></pre>
+
+<h3>Run on Android</h3>
+
+<pre><code># Run on connected Android device or emulator
+npx ng-mobile run android
+
+# Build a release APK
+npx ng-mobile build android --release</code></pre>
+
+<h3>Run on iOS (macOS only)</h3>
+
+<pre><code># Run on iOS Simulator
+npx ng-mobile run ios
+
+# Run on specific simulator
+npx ng-mobile run ios --simulator="iPhone 15 Pro"
+
+# Build for App Store
+npx ng-mobile build ios --release</code></pre>
+
+<h2>Platform-Specific Code</h2>
+
+<p>Use <code>Platform.select()</code> to write platform-specific logic:</p>
+
+<pre><code>import &#123; Platform &#125; from '&#64;pegasusheavy/angular-platform-mobile';
+
+const styles = StyleSheet.create(&#123;
+  container: &#123;
+    padding: Platform.select(&#123;
+      ios: 20,
+      android: 16,
+    &#125;),
+    ...Platform.select(&#123;
+      ios: &#123;
+        shadowColor: '#000',
+        shadowOffset: &#123; width: 0, height: 2 &#125;,
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+      &#125;,
+      android: &#123;
+        elevation: 4,
+      &#125;,
+    &#125;),
+  &#125;,
+&#125;);</code></pre>
+
+<h2>Next Steps</h2>
+
+<p>Now that you have your first app running, explore these resources:</p>
+
+<ul>
+  <li><a href="/components">Components</a> - Learn about all available native components</li>
+  <li><a href="/styling">Styling</a> - Master the styling system</li>
+  <li><a href="/animation">Animation</a> - Create smooth native animations</li>
+  <li><a href="/services">Services</a> - Access native APIs and features</li>
+  <li><a href="/cli">CLI Reference</a> - Full CLI documentation</li>
+</ul>
+
+<div class="info-box">
+  <h4>💡 Tip</h4>
+  <p>
+    Enable <code>debug: true</code> in your bootstrap config to see detailed
+    bridge communication logs in the console during development.
+  </p>
+</div>

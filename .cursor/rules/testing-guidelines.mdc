@@ -1,0 +1,148 @@
+# Testing Guidelines
+
+## Test Framework
+
+This project uses **Vitest** (not Jest). Always use Vitest imports and APIs.
+
+```typescript
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+```
+
+## Test File Location
+
+Tests are co-located with source files:
+```
+src/
+├── core/
+│   ├── bridge/
+│   │   ├── native-bridge.ts
+│   │   └── native-bridge.spec.ts  ✓
+│   └── animation/
+│       ├── animated.ts
+│       └── animated.spec.ts  ✓
+```
+
+## Test Structure
+
+```typescript
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { SomeClass } from './some-class';
+
+describe('SomeClass', () => {
+  let instance: SomeClass;
+
+  beforeEach(() => {
+    vi.useFakeTimers();
+    instance = new SomeClass();
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+    vi.useRealTimers();
+  });
+
+  describe('methodName', () => {
+    it('should do expected behavior', () => {
+      const result = instance.methodName();
+      expect(result).toBe(expectedValue);
+    });
+
+    it('should handle edge case', async () => {
+      await expect(instance.asyncMethod()).resolves.toBeDefined();
+    });
+  });
+});
+```
+
+## Mocking Patterns
+
+### Mock Functions
+```typescript
+const mockCallback = vi.fn();
+instance.onEvent(mockCallback);
+instance.triggerEvent();
+expect(mockCallback).toHaveBeenCalledWith({ type: 'event' });
+```
+
+### Spy on Methods
+```typescript
+vi.spyOn(instance, 'privateMethod');
+instance.publicMethod();
+expect(instance.privateMethod).toHaveBeenCalled();
+```
+
+### Mock Timers
+```typescript
+vi.useFakeTimers();
+
+const callback = vi.fn();
+setTimeout(callback, 1000);
+
+vi.advanceTimersByTime(1000);
+expect(callback).toHaveBeenCalled();
+```
+
+### Mock Modules
+```typescript
+vi.mock('./some-dependency', () => ({
+  SomeDependency: vi.fn().mockImplementation(() => ({
+    method: vi.fn().mockResolvedValue('mocked'),
+  })),
+}));
+```
+
+## Async Testing
+
+```typescript
+// Use async/await (NOT done callback)
+it('should handle async operations', async () => {
+  const result = await instance.asyncMethod();
+  expect(result).toBeDefined();
+});
+
+// For promises
+it('should resolve correctly', async () => {
+  await expect(instance.asyncMethod()).resolves.toBe('value');
+});
+
+// For rejections
+it('should reject on error', async () => {
+  await expect(instance.failingMethod()).rejects.toThrow('error');
+});
+```
+
+## Animation Testing
+
+```typescript
+import { Animated } from './animated';
+
+describe('Animation', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+
+  it('should animate value over time', () => {
+    const value = new Animated.Value(0);
+    Animated.timing(value, { toValue: 100, duration: 100 }).start();
+
+    vi.advanceTimersByTime(50);
+    expect(value.getValue()).toBeCloseTo(50);
+
+    vi.advanceTimersByTime(50);
+    expect(value.getValue()).toBe(100);
+  });
+});
+```
+
+## Running Tests
+
+```bash
+# Run all tests
+pnpm test
+
+# Run tests in watch mode
+pnpm test:watch
+
+# Run with coverage
+pnpm test:coverage
+```

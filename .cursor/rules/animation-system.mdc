@@ -1,0 +1,164 @@
+# Animation System
+
+## Animated API
+
+The animation system mirrors React Native's Animated API.
+
+### Creating Animated Values
+
+```typescript
+import { Animated } from '@pegasusheavy/angular-platform-mobile';
+
+// Single value
+const opacity = new Animated.Value(0);
+
+// XY value (for position)
+const position = new Animated.ValueXY({ x: 0, y: 0 });
+```
+
+### Timing Animation
+
+```typescript
+Animated.timing(opacity, {
+  toValue: 1,
+  duration: 300,
+  delay: 100,
+  useNativeDriver: true,
+}).start((result) => {
+  if (result.finished) {
+    console.log('Animation completed');
+  }
+});
+```
+
+### Spring Animation
+
+```typescript
+Animated.spring(scale, {
+  toValue: 1,
+  stiffness: 100,
+  damping: 10,
+  mass: 1,
+  useNativeDriver: true,
+}).start();
+```
+
+### Easing Functions
+
+```typescript
+import { Easing } from '@pegasusheavy/angular-platform-mobile';
+
+Animated.timing(value, {
+  toValue: 100,
+  duration: 500,
+  easing: Easing.bezier(0.25, 0.1, 0.25, 1),
+}).start();
+
+// Available easings:
+Easing.linear
+Easing.ease        // Default ease
+Easing.easeIn
+Easing.easeOut
+Easing.easeInOut
+Easing.quad        // Quadratic
+Easing.cubic       // Cubic
+Easing.poly(n)     // Polynomial
+Easing.sin         // Sinusoidal
+Easing.circle      // Circular
+Easing.exp         // Exponential
+Easing.elastic(bounciness)
+Easing.back(s)     // Overshoot
+Easing.bounce      // Bouncy
+Easing.bezier(x1, y1, x2, y2)  // Custom curve
+```
+
+### Interpolation
+
+```typescript
+const rotation = opacity.interpolate({
+  inputRange: [0, 1],
+  outputRange: ['0deg', '360deg'],
+});
+
+const backgroundColor = progress.interpolate({
+  inputRange: [0, 0.5, 1],
+  outputRange: ['#ff0000', '#00ff00', '#0000ff'],
+  extrapolate: 'clamp',
+});
+```
+
+### Composition
+
+```typescript
+// Sequential
+Animated.sequence([
+  Animated.timing(value1, { toValue: 100, duration: 200 }),
+  Animated.timing(value2, { toValue: 100, duration: 200 }),
+]).start();
+
+// Parallel
+Animated.parallel([
+  Animated.timing(opacity, { toValue: 1, duration: 300 }),
+  Animated.timing(scale, { toValue: 1, duration: 300 }),
+]).start();
+
+// Staggered
+Animated.stagger(100, [
+  Animated.timing(item1, { toValue: 1, duration: 200 }),
+  Animated.timing(item2, { toValue: 1, duration: 200 }),
+  Animated.timing(item3, { toValue: 1, duration: 200 }),
+]).start();
+
+// Delay
+Animated.sequence([
+  Animated.delay(500),
+  Animated.timing(value, { toValue: 1, duration: 300 }),
+]).start();
+
+// Loop
+Animated.loop(
+  Animated.timing(rotation, { toValue: 1, duration: 1000 }),
+  { iterations: 3 }  // -1 for infinite
+).start();
+```
+
+### Value Operations
+
+```typescript
+// Get current value
+const currentValue = animatedValue.getValue();
+
+// Set value directly (no animation)
+animatedValue.setValue(100);
+
+// Offset handling
+animatedValue.setOffset(50);
+animatedValue.flattenOffset();
+animatedValue.extractOffset();
+
+// Listeners
+const listenerId = animatedValue.addListener(({ value }) => {
+  console.log('Value changed:', value);
+});
+animatedValue.removeListener(listenerId);
+animatedValue.removeAllListeners();
+
+// Stop animation
+animatedValue.stopAnimation((value) => {
+  console.log('Stopped at:', value);
+});
+```
+
+### Observable Integration
+
+```typescript
+// AnimatedValue exposes value$ observable
+animatedValue.value$.subscribe((value) => {
+  // React to value changes
+});
+
+// AnimatedInterpolation also has value$
+interpolation.value$.subscribe((interpolatedValue) => {
+  // React to interpolated values
+});
+```

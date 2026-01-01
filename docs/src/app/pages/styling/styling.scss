@@ -1,0 +1,68 @@
+.lead {
+  font-size: 1.25rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 2rem;
+}
+
+.flex-examples {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.flex-example {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 1.25rem;
+
+  h4 {
+    font-size: 0.9375rem;
+    margin: 0 0 1rem;
+  }
+
+  pre {
+    margin: 0 0 1rem;
+    padding: 0.75rem;
+    font-size: 0.8125rem;
+  }
+}
+
+.flex-preview {
+  display: flex;
+  background: var(--color-bg-tertiary);
+  border-radius: 8px;
+  padding: 1rem;
+  min-height: 100px;
+
+  &.row {
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+
+  &.column {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &.space-between {
+    justify-content: space-between;
+  }
+
+  &.center {
+    align-items: center;
+  }
+}
+
+.box {
+  width: 40px;
+  height: 40px;
+  background: var(--gradient-primary);
+  border-radius: 6px;
+
+  &.flex-1 {
+    flex: 1;
+    width: auto;
+  }
+}
