@@ -6,7 +6,7 @@ import { NativeStyle, transformStyle } from '../../types/style.types';
 /**
  * View props type (JSON-compatible)
  */
-export type ViewProps = Record<string, JsonValue>;
+export type ViewProps = Record<string, unknown>;
 
 /**
  * View event payload

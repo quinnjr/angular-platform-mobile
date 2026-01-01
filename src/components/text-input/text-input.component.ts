@@ -15,7 +15,7 @@ import { TextStyle } from '../../types/style.types';
 import { TextChangeEvent, SubmitEditingEvent, FocusEvent, BlurEvent, LayoutEvent } from '../../types/event.types';
 import { AccessibilityProps } from '../../types/native.types';
 import { NativeComponent } from '../../decorators/native-component';
-import { BridgeService } from '../../core/bridge/bridge.service';
+import { BridgeService, ViewProps } from '../../core/bridge/bridge.service';
 
 /**
  * Keyboard type options
@@ -234,7 +234,7 @@ export class TextInputComponent
   ngOnChanges(changes: SimpleChanges): void {
     if (!this.viewId) return;
 
-    const props: Record<string, any> = {};
+    const props: ViewProps = {};
 
     for (const [key, change] of Object.entries(changes)) {
       if (!change.firstChange) {
@@ -243,7 +243,7 @@ export class TextInputComponent
     }
 
     if (Object.keys(props).length > 0) {
-      this.bridgeService.updateView(this.viewId, props);
+      void this.bridgeService.updateView(this.viewId, props);
     }
   }
 
@@ -276,7 +276,7 @@ export class TextInputComponent
     }
   }
 
-  private getProps(): Record<string, any> {
+  private getProps(): ViewProps {
     return {
       value: this.value ?? this.defaultValue ?? '',
       placeholder: this.placeholder,

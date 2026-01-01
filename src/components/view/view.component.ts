@@ -14,7 +14,7 @@ import { LayoutEvent, PressEvent } from '../../types/event.types';
 import { AccessibilityProps, HitSlop, PointerEvents } from '../../types/native.types';
 import { NativeComponent } from '../../decorators/native-component';
 import { NativeProp } from '../../decorators/native-prop';
-import { BridgeService } from '../../core/bridge/bridge.service';
+import { BridgeService, ViewProps } from '../../core/bridge/bridge.service';
 
 /**
  * View Component
@@ -93,7 +93,7 @@ export class ViewComponent implements OnInit, OnDestroy, OnChanges, Accessibilit
   ngOnChanges(changes: SimpleChanges): void {
     if (!this.viewId) return;
 
-    const props: Record<string, any> = {};
+    const props: ViewProps = {};
 
     for (const [key, change] of Object.entries(changes)) {
       if (!change.firstChange) {
@@ -102,7 +102,7 @@ export class ViewComponent implements OnInit, OnDestroy, OnChanges, Accessibilit
     }
 
     if (Object.keys(props).length > 0) {
-      this.bridgeService.updateView(this.viewId, props);
+      void this.bridgeService.updateView(this.viewId, props);
     }
   }
 
@@ -112,7 +112,7 @@ export class ViewComponent implements OnInit, OnDestroy, OnChanges, Accessibilit
     }
   }
 
-  private getProps(): Record<string, any> {
+  private getProps(): ViewProps {
     return {
       style: this.style,
       accessible: this.accessible,

@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { ViewStyle } from '../../types/style.types';
 import { NativeComponent } from '../../decorators/native-component';
-import { BridgeService } from '../../core/bridge/bridge.service';
+import { BridgeService, ViewProps } from '../../core/bridge/bridge.service';
 
 /**
  * WebView source type
@@ -178,7 +178,7 @@ export class WebViewComponent implements OnInit, OnDestroy, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (!this.viewId) return;
 
-    const props: Record<string, any> = {};
+    const props: ViewProps = {};
 
     for (const [key, change] of Object.entries(changes)) {
       if (!change.firstChange) {
@@ -187,7 +187,7 @@ export class WebViewComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     if (Object.keys(props).length > 0) {
-      this.bridgeService.updateView(this.viewId, props);
+      void this.bridgeService.updateView(this.viewId, props);
     }
   }
 
@@ -197,7 +197,7 @@ export class WebViewComponent implements OnInit, OnDestroy, OnChanges {
     }
   }
 
-  private getProps(): Record<string, any> {
+  private getProps(): ViewProps {
     return {
       source: this.source,
       javaScriptEnabled: this.javaScriptEnabled ?? true,

@@ -8,7 +8,7 @@ import { BridgeService } from '../core/bridge/bridge.service';
  */
 export interface NavigationState {
   routeName: string;
-  params?: Record<string, any>;
+  params?: Record<string, unknown>;
   key: string;
 }
 
@@ -16,7 +16,7 @@ export interface NavigationState {
  * Navigation options
  */
 export interface NavigateOptions {
-  params?: Record<string, any>;
+  params?: Record<string, unknown>;
   merge?: boolean;
 }
 
@@ -169,7 +169,7 @@ export class NavigationService implements OnDestroy {
   /**
    * Reset the navigation state
    */
-  async reset(routeName: string, params?: Record<string, any>): Promise<void> {
+  async reset(routeName: string, params?: Record<string, unknown>): Promise<void> {
     const key = `route_${++this.keyCounter}`;
     const state: NavigationState = {
       routeName,
@@ -191,14 +191,14 @@ export class NavigationService implements OnDestroy {
   /**
    * Get route params
    */
-  getParams<T extends Record<string, any>>(): T | undefined {
+  getParams<T extends Record<string, unknown>>(): T | undefined {
     return this.navigationState$.value?.params as T | undefined;
   }
 
   /**
    * Set params for current route
    */
-  async setParams(params: Record<string, any>): Promise<void> {
+  async setParams(params: Record<string, unknown>): Promise<void> {
     const current = this.navigationState$.value;
     if (!current) return;
 

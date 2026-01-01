@@ -13,7 +13,7 @@ import { TextStyle } from '../../types/style.types';
 import { PressEvent, LayoutEvent } from '../../types/event.types';
 import { AccessibilityProps } from '../../types/native.types';
 import { NativeComponent } from '../../decorators/native-component';
-import { BridgeService } from '../../core/bridge/bridge.service';
+import { BridgeService, ViewProps } from '../../core/bridge/bridge.service';
 
 /**
  * Text Component
@@ -102,7 +102,7 @@ export class TextComponent implements OnInit, OnDestroy, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (!this.viewId) return;
 
-    const props: Record<string, any> = {};
+    const props: ViewProps = {};
 
     for (const [key, change] of Object.entries(changes)) {
       if (!change.firstChange) {
@@ -111,7 +111,7 @@ export class TextComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     if (Object.keys(props).length > 0) {
-      this.bridgeService.updateView(this.viewId, props);
+      void this.bridgeService.updateView(this.viewId, props);
     }
   }
 
@@ -121,7 +121,7 @@ export class TextComponent implements OnInit, OnDestroy, OnChanges {
     }
   }
 
-  private getProps(): Record<string, any> {
+  private getProps(): ViewProps {
     return {
       text: this.text,
       style: this.style,

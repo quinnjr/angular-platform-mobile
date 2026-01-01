@@ -182,7 +182,7 @@ export class StorageService {
   /**
    * Merge a value with an existing stored value
    */
-  async mergeItem<T extends Record<string, any>>(key: string, value: Partial<T>): Promise<void> {
+  async mergeItem<T extends Record<string, unknown>>(key: string, value: Partial<T>): Promise<void> {
     const existing = await this.getItem<T>(key);
     const merged = { ...(existing || {}), ...value } as T;
     await this.setItem(key, merged);

@@ -15,7 +15,7 @@ import { ViewStyle } from '../../types/style.types';
 import { SwitchChangeEvent } from '../../types/event.types';
 import { AccessibilityProps } from '../../types/native.types';
 import { NativeComponent } from '../../decorators/native-component';
-import { BridgeService } from '../../core/bridge/bridge.service';
+import { BridgeService, ViewProps } from '../../core/bridge/bridge.service';
 
 /**
  * Switch Component
@@ -95,7 +95,7 @@ export class SwitchComponent implements OnInit, OnDestroy, OnChanges, ControlVal
   ngOnChanges(changes: SimpleChanges): void {
     if (!this.viewId) return;
 
-    const props: Record<string, any> = {};
+    const props: ViewProps = {};
 
     for (const [key, change] of Object.entries(changes)) {
       if (!change.firstChange) {
@@ -104,7 +104,7 @@ export class SwitchComponent implements OnInit, OnDestroy, OnChanges, ControlVal
     }
 
     if (Object.keys(props).length > 0) {
-      this.bridgeService.updateView(this.viewId, props);
+      void this.bridgeService.updateView(this.viewId, props);
     }
   }
 
@@ -137,7 +137,7 @@ export class SwitchComponent implements OnInit, OnDestroy, OnChanges, ControlVal
     }
   }
 
-  private getProps(): Record<string, any> {
+  private getProps(): ViewProps {
     return {
       value: this.value ?? false,
       thumbColor: this.thumbColor || this.thumbTintColor,

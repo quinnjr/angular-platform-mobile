@@ -120,7 +120,7 @@ export class LinkingService implements OnDestroy {
     action: string;
     data?: string;
     type?: string;
-    extras?: Record<string, any>;
+    extras?: Record<string, unknown>;
     packageName?: string;
     className?: string;
   }): Promise<void> {
@@ -134,7 +134,7 @@ export class LinkingService implements OnDestroy {
     action: string;
     data?: string;
     type?: string;
-    extras?: Record<string, any>;
+    extras?: Record<string, unknown>;
     flags?: number[];
   }): Promise<any> {
     return this.bridgeService.request('sendIntent', options);

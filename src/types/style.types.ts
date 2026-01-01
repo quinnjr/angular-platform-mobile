@@ -243,8 +243,8 @@ export function createStyleSheet<T extends Record<string, NativeStyle>>(styles: 
 /**
  * Transform style object to Android-compatible format
  */
-export function transformStyle(style: NativeStyle): Record<string, any> {
-  const transformed: Record<string, any> = {};
+export function transformStyle(style: NativeStyle): Record<string, unknown> {
+  const transformed: Record<string, unknown> = {};
 
   for (const [key, value] of Object.entries(style)) {
     if (value === undefined || value === null) {

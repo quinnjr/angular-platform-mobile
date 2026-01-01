@@ -13,7 +13,7 @@ import { ViewStyle } from '../../types/style.types';
 import { LayoutEvent } from '../../types/event.types';
 import { EdgeInsets } from '../../types/native.types';
 import { NativeComponent } from '../../decorators/native-component';
-import { BridgeService } from '../../core/bridge/bridge.service';
+import { BridgeService, ViewProps } from '../../core/bridge/bridge.service';
 
 /**
  * Safe area edges
@@ -100,7 +100,7 @@ export class SafeAreaViewComponent implements OnInit, OnDestroy, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (!this.viewId) return;
 
-    const props: Record<string, any> = {};
+    const props: ViewProps = {};
 
     for (const [key, change] of Object.entries(changes)) {
       if (!change.firstChange) {
@@ -128,7 +128,7 @@ export class SafeAreaViewComponent implements OnInit, OnDestroy, OnChanges {
     }
   }
 
-  private getProps(): Record<string, any> {
+  private getProps(): ViewProps {
     const insets = this.getAppliedInsets();
     const mode = this.mode ?? 'padding';
 

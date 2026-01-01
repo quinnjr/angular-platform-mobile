@@ -133,7 +133,7 @@ export interface NetworkInfo {
 export interface NativeModule {
   name: string;
   methods: string[];
-  constants?: Record<string, any>;
+  constants?: Record<string, unknown>;
   events?: string[];
 }
 

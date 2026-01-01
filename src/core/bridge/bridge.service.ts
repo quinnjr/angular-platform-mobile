@@ -6,7 +6,7 @@ import { NativeBridge, BridgeConnectionState, JsonValue, BridgePayload } from '.
 /**
  * View properties type
  */
-export type ViewProps = Record<string, JsonValue>;
+export type ViewProps = Record<string, unknown>;
 
 /**
  * Native method arguments

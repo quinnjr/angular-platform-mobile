@@ -18,7 +18,7 @@ import { NativeStyle } from '../../types/style.types';
 /**
  * View props type
  */
-export type ViewProps = Record<string, JsonValue>;
+export type ViewProps = Record<string, unknown>;
 
 /**
  * View types for mobile

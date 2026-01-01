@@ -10,7 +10,7 @@ import {
 /**
  * Transformed style result type
  */
-type TransformedStyleResult = Record<string, string | number | boolean | null | undefined>;
+type TransformedStyleResult = Record<string, unknown>;
 
 /**
  * Registered style sheets

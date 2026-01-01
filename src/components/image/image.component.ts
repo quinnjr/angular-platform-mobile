@@ -13,7 +13,7 @@ import { ImageStyle, ResizeModeType } from '../../types/style.types';
 import { ImageLoadEvent, ImageErrorEvent, ImageProgressEvent, LayoutEvent } from '../../types/event.types';
 import { ImageSource, AccessibilityProps } from '../../types/native.types';
 import { NativeComponent } from '../../decorators/native-component';
-import { BridgeService } from '../../core/bridge/bridge.service';
+import { BridgeService, ViewProps } from '../../core/bridge/bridge.service';
 
 /**
  * Image Component
@@ -95,16 +95,16 @@ export class ImageComponent implements OnInit, OnDestroy, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (!this.viewId) return;
 
-    const props: Record<string, any> = {};
+    const props: ViewProps = {};
 
     for (const [key, change] of Object.entries(changes)) {
       if (!change.firstChange) {
-        props[key] = change.currentValue;
+        props[key] = change.currentValue as unknown;
       }
     }
 
     if (Object.keys(props).length > 0) {
-      this.bridgeService.updateView(this.viewId, props);
+      void this.bridgeService.updateView(this.viewId, props);
     }
   }
 
@@ -114,7 +114,7 @@ export class ImageComponent implements OnInit, OnDestroy, OnChanges {
     }
   }
 
-  private getProps(): Record<string, any> {
+  private getProps(): ViewProps {
     return {
       source: this.normalizeSource(this.source),
       defaultSource: this.defaultSource ? this.normalizeSource(this.defaultSource) : undefined,

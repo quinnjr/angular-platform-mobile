@@ -4,7 +4,7 @@
 export interface ViewNode {
   id: string;
   type: string;
-  props: Record<string, any>;
+  props: Record<string, unknown>;
   children: string[];
   parent: string | null;
 }
@@ -147,7 +147,7 @@ export class ViewRegistry {
   /**
    * Update view props
    */
-  updateProps(viewId: string, props: Record<string, any>): void {
+  updateProps(viewId: string, props: Record<string, unknown>): void {
     const node = this.views.get(viewId);
     if (node) {
       node.props = { ...node.props, ...props };

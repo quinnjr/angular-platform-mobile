@@ -12,7 +12,7 @@ import {
 import { ViewStyle } from '../../types/style.types';
 import { ModalRequestCloseEvent, LayoutEvent } from '../../types/event.types';
 import { NativeComponent } from '../../decorators/native-component';
-import { BridgeService } from '../../core/bridge/bridge.service';
+import { BridgeService, ViewProps } from '../../core/bridge/bridge.service';
 
 /**
  * Animation type for modal
@@ -121,7 +121,7 @@ export class ModalComponent implements OnInit, OnDestroy, OnChanges {
         await this.hideModal();
       }
     } else if (this.viewId) {
-      const props: Record<string, any> = {};
+      const props: ViewProps = {};
 
       for (const [key, change] of Object.entries(changes)) {
         if (!change.firstChange && key !== 'visible') {
@@ -160,7 +160,7 @@ export class ModalComponent implements OnInit, OnDestroy, OnChanges {
     this.dismiss.emit();
   }
 
-  private getProps(): Record<string, any> {
+  private getProps(): ViewProps {
     return {
       visible: this.visible,
       animationType: this.animationType ?? 'none',

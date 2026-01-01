@@ -13,7 +13,7 @@ import { ViewStyle } from '../../types/style.types';
 import { PressEvent, LayoutEvent } from '../../types/event.types';
 import { AccessibilityProps, HitSlop } from '../../types/native.types';
 import { NativeComponent } from '../../decorators/native-component';
-import { BridgeService } from '../../core/bridge/bridge.service';
+import { BridgeService, ViewProps } from '../../core/bridge/bridge.service';
 
 /**
  * TouchableOpacity Component
@@ -111,7 +111,7 @@ export class TouchableComponent implements OnInit, OnDestroy, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (!this.viewId) return;
 
-    const props: Record<string, any> = {};
+    const props: ViewProps = {};
 
     for (const [key, change] of Object.entries(changes)) {
       if (!change.firstChange) {
@@ -120,7 +120,7 @@ export class TouchableComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     if (Object.keys(props).length > 0) {
-      this.bridgeService.updateView(this.viewId, props);
+      void this.bridgeService.updateView(this.viewId, props);
     }
   }
 
@@ -130,7 +130,7 @@ export class TouchableComponent implements OnInit, OnDestroy, OnChanges {
     }
   }
 
-  private getProps(): Record<string, any> {
+  private getProps(): ViewProps {
     return {
       style: this.style,
       activeOpacity: this.activeOpacity ?? 0.2,
