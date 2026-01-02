@@ -225,12 +225,20 @@ class FlexboxLayout @JvmOverloads constructor(
         var flex: Float = 0f
         var flexGrow: Float = 0f
         var flexShrink: Float = 1f
-        var flexBasis: Int = WRAP_CONTENT
+        var flexBasis: Int = ViewGroup.LayoutParams.WRAP_CONTENT
         var alignSelf: AlignSelf = AlignSelf.AUTO
 
         constructor(width: Int, height: Int) : super(width, height)
+        constructor(c: Context, attrs: AttributeSet?) : super(c, attrs)
         constructor(source: ViewGroup.LayoutParams) : super(source)
         constructor(source: MarginLayoutParams) : super(source)
+        constructor(source: LayoutParams) : super(source as MarginLayoutParams) {
+            flex = source.flex
+            flexGrow = source.flexGrow
+            flexShrink = source.flexShrink
+            flexBasis = source.flexBasis
+            alignSelf = source.alignSelf
+        }
     }
 
     override fun generateDefaultLayoutParams(): LayoutParams {
