@@ -225,7 +225,7 @@ class FlexboxLayout @JvmOverloads constructor(
         var flex: Float = 0f
         var flexGrow: Float = 0f
         var flexShrink: Float = 1f
-        var flexBasis: Int = ViewGroup.LayoutParams.WRAP_CONTENT
+        var flexBasis: Int = ViewGroup.ViewGroup.LayoutParams.WRAP_CONTENT
         var alignSelf: AlignSelf = AlignSelf.AUTO
 
         constructor(width: Int, height: Int) : super(width, height)
@@ -242,7 +242,7 @@ class FlexboxLayout @JvmOverloads constructor(
     }
 
     override fun generateDefaultLayoutParams(): LayoutParams {
-        return LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
+        return LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
     }
 
     override fun generateLayoutParams(attrs: AttributeSet?): LayoutParams {
