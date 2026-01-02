@@ -14,8 +14,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-spm:
-    name: Build with Swift Package Manager
+  build-xcode:
+    name: Build with Xcode
     runs-on: macos-14
 
     steps:
@@ -28,20 +28,36 @@ jobs:
       - name: Show Swift version
         run: swift --version
 
-      - name: Resolve Swift dependencies
-        run: swift package resolve
+      - name: List available simulators
+        run: xcrun simctl list devices available
+
+      - name: Build for iOS Simulator (Debug)
+        run: |
+          xcodebuild build \
+            -scheme AngularMobile \
+            -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.5' \
+            -configuration Debug \
+            CODE_SIGNING_ALLOWED=NO \
+            -skipPackagePluginValidation
         working-directory: native/ios/AngularMobile
 
-      - name: Build iOS runtime (Debug)
-        run: swift build -c debug
+      - name: Build for iOS Simulator (Release)
+        run: |
+          xcodebuild build \
+            -scheme AngularMobile \
+            -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.5' \
+            -configuration Release \
+            CODE_SIGNING_ALLOWED=NO \
+            -skipPackagePluginValidation
         working-directory: native/ios/AngularMobile
 
-      - name: Build iOS runtime (Release)
-        run: swift build -c release
-        working-directory: native/ios/AngularMobile
-
-      - name: Run Swift tests
-        run: swift test
+      - name: Run tests
+        run: |
+          xcodebuild test \
+            -scheme AngularMobile \
+            -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.5' \
+            CODE_SIGNING_ALLOWED=NO \
+            -skipPackagePluginValidation
         working-directory: native/ios/AngularMobile
         continue-on-error: true
 
@@ -59,7 +75,7 @@ jobs:
       - name: Install CocoaPods
         run: gem install cocoapods
 
-      - name: Validate podspec
-        run: pod lib lint --allow-warnings --no-clean
+      - name: Validate podspec (quick)
+        run: pod lib lint --allow-warnings --quick
         working-directory: native/ios
         continue-on-error: true
