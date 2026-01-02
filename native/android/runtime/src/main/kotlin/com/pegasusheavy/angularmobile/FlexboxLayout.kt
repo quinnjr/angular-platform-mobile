@@ -225,7 +225,7 @@ class FlexboxLayout @JvmOverloads constructor(
         var flex: Float = 0f
         var flexGrow: Float = 0f
         var flexShrink: Float = 1f
-        var flexBasis: Int = ViewGroup.ViewGroup.LayoutParams.WRAP_CONTENT
+        var flexBasis: Int = ViewGroup.LayoutParams.WRAP_CONTENT
         var alignSelf: AlignSelf = AlignSelf.AUTO
 
         constructor(width: Int, height: Int) : super(width, height)
