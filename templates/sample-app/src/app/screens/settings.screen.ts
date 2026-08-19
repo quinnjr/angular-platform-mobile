@@ -10,7 +10,7 @@ import {
   AlertService,
   LinkingService,
   StorageService,
-} from 'angular-platform-android';
+} from 'angular-platform-mobile';
 
 @Component({
   selector: 'app-settings-screen',
@@ -310,11 +310,11 @@ export class SettingsScreenComponent {
   }
 
   async onOpenDocs(): Promise<void> {
-    await this.linking.openURL('https://github.com/quinnjr/angular-platform-android');
+    await this.linking.openURL('https://github.com/quinnjr/angular-platform-mobile');
   }
 
   async onOpenGitHub(): Promise<void> {
-    await this.linking.openURL('https://github.com/quinnjr/angular-platform-android');
+    await this.linking.openURL('https://github.com/quinnjr/angular-platform-mobile');
   }
 
   async onContactSupport(): Promise<void> {

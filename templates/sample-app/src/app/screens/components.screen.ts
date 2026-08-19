@@ -13,7 +13,7 @@ import {
   ImageComponent,
   ToastService,
   AlertService,
-} from 'angular-platform-android';
+} from 'angular-platform-mobile';
 
 @Component({
   selector: 'app-components-screen',

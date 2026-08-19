@@ -8,7 +8,7 @@ import {
   ToastService,
   ShareService,
   ClipboardService,
-} from 'angular-platform-android';
+} from 'angular-platform-mobile';
 
 @Component({
   selector: 'app-profile-screen',

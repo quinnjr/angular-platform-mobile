@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * angular-platform-android CLI
+ * angular-platform-mobile CLI
  *
  * Command-line interface for building and running Angular Android apps.
  *

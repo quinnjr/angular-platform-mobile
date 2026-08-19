@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * angular-platform-android Development Server
+ * angular-platform-mobile Development Server
  *
  * Handles hot reload and bridge communication during development.
  *

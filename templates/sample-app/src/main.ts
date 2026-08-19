@@ -1,9 +1,9 @@
 /**
  * Sample Angular Android Application
- * Demonstrates the usage of angular-platform-android
+ * Demonstrates the usage of angular-platform-mobile
  */
 
-import { bootstrapAndroidApplication } from 'angular-platform-android';
+import { bootstrapAndroidApplication } from 'angular-platform-mobile';
 import { AppComponent } from './app/app.component';
 import { provideAnimations } from '@angular/platform-browser/animations';
 
