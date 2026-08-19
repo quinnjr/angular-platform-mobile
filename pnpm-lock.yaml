@@ -29,7 +29,7 @@ importers:
     devDependencies:
       '@angular/common':
         specifier: ^22.0.1
-        version: 22.0.1(@angular/core@18.2.14(rxjs@7.8.2)(zone.js@0.14.10))(rxjs@7.8.2)
+        version: 22.0.5(@angular/core@18.2.14(rxjs@7.8.2)(zone.js@0.14.10))(rxjs@7.8.2)
       '@angular/compiler':
         specifier: ^22.0.2
         version: 22.0.2
@@ -41,10 +41,10 @@ importers:
         version: 18.2.14(rxjs@7.8.2)(zone.js@0.14.10)
       '@angular/forms':
         specifier: ^18.0.0
-        version: 18.2.14(@angular/common@22.0.1(@angular/core@18.2.14(rxjs@7.8.2)(zone.js@0.14.10))(rxjs@7.8.2))(@angular/core@18.2.14(rxjs@7.8.2)(zone.js@0.14.10))(@angular/platform-browser@18.2.14(@angular/common@22.0.1(@angular/core@18.2.14(rxjs@7.8.2)(zone.js@0.14.10))(rxjs@7.8.2))(@angular/core@18.2.14(rxjs@7.8.2)(zone.js@0.14.10)))(rxjs@7.8.2)
+        version: 18.2.14(@angular/common@22.0.5(@angular/core@18.2.14(rxjs@7.8.2)(zone.js@0.14.10))(rxjs@7.8.2))(@angular/core@18.2.14(rxjs@7.8.2)(zone.js@0.14.10))(@angular/platform-browser@18.2.14(@angular/common@22.0.5(@angular/core@18.2.14(rxjs@7.8.2)(zone.js@0.14.10))(rxjs@7.8.2))(@angular/core@18.2.14(rxjs@7.8.2)(zone.js@0.14.10)))(rxjs@7.8.2)
       '@angular/platform-browser':
         specifier: ^18.0.0
-        version: 18.2.14(@angular/common@22.0.1(@angular/core@18.2.14(rxjs@7.8.2)(zone.js@0.14.10))(rxjs@7.8.2))(@angular/core@18.2.14(rxjs@7.8.2)(zone.js@0.14.10))
+        version: 18.2.14(@angular/common@22.0.5(@angular/core@18.2.14(rxjs@7.8.2)(zone.js@0.14.10))(rxjs@7.8.2))(@angular/core@18.2.14(rxjs@7.8.2)(zone.js@0.14.10))
       '@commitlint/cli':
         specifier: ^19.0.0
         version: 19.8.1(@types/node@25.9.3)(typescript@6.0.3)
@@ -97,11 +97,11 @@ packages:
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
     engines: {node: '>=6.0.0'}
 
-  '@angular/common@22.0.1':
-    resolution: {integrity: sha512-EczDHu+ziop3x2CSh9+hdkegTSjblYvuH0y4aZ8biqh+pGFRni24Qu9kZiV5VrBprIJG5NeiCEA2rT6fJ7w/Nw==}
+  '@angular/common@22.0.5':
+    resolution: {integrity: sha512-8HUuQms6bVjjRBF9FScYzepjhesrsPAjJh8UcHaw9YdGwMSn2eUiLZj9V1PnPV9BVu0beBcnAhX50ceeldbcTg==}
     engines: {node: ^22.22.3 || ^24.15.0 || >=26.0.0}
     peerDependencies:
-      '@angular/core': 22.0.1
+      '@angular/core': 22.0.5
       rxjs: ^6.5.3 || ^7.4.0
 
   '@angular/compiler-cli@18.2.14':
@@ -1285,7 +1285,7 @@ packages:
   git-raw-commits@4.0.0:
     resolution: {integrity: sha512-ICsMM1Wk8xSGMowkOmPrzo2Fgmfo4bMHLNX6ytHjajRJUqvHOw/TFapQ+QG75c3X/tTDDhOSRPGC52dDbNM8FQ==}
     engines: {node: '>=16'}
-    deprecated: This package is no longer maintained. For the JavaScript API, please use @conventional-changelog/git-client instead.
+    deprecated: Deprecated and no longer maintained. Use @conventional-changelog/git-client instead.
     hasBin: true
 
   glob-parent@5.1.2:
@@ -2014,7 +2014,7 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.13
       '@jridgewell/trace-mapping': 0.3.31
 
-  '@angular/common@22.0.1(@angular/core@18.2.14(rxjs@7.8.2)(zone.js@0.14.10))(rxjs@7.8.2)':
+  '@angular/common@22.0.5(@angular/core@18.2.14(rxjs@7.8.2)(zone.js@0.14.10))(rxjs@7.8.2)':
     dependencies:
       '@angular/core': 18.2.14(rxjs@7.8.2)(zone.js@0.14.10)
       rxjs: 7.8.2
@@ -2045,17 +2045,17 @@ snapshots:
       tslib: 2.8.1
       zone.js: 0.14.10
 
-  '@angular/forms@18.2.14(@angular/common@22.0.1(@angular/core@18.2.14(rxjs@7.8.2)(zone.js@0.14.10))(rxjs@7.8.2))(@angular/core@18.2.14(rxjs@7.8.2)(zone.js@0.14.10))(@angular/platform-browser@18.2.14(@angular/common@22.0.1(@angular/core@18.2.14(rxjs@7.8.2)(zone.js@0.14.10))(rxjs@7.8.2))(@angular/core@18.2.14(rxjs@7.8.2)(zone.js@0.14.10)))(rxjs@7.8.2)':
+  '@angular/forms@18.2.14(@angular/common@22.0.5(@angular/core@18.2.14(rxjs@7.8.2)(zone.js@0.14.10))(rxjs@7.8.2))(@angular/core@18.2.14(rxjs@7.8.2)(zone.js@0.14.10))(@angular/platform-browser@18.2.14(@angular/common@22.0.5(@angular/core@18.2.14(rxjs@7.8.2)(zone.js@0.14.10))(rxjs@7.8.2))(@angular/core@18.2.14(rxjs@7.8.2)(zone.js@0.14.10)))(rxjs@7.8.2)':
     dependencies:
-      '@angular/common': 22.0.1(@angular/core@18.2.14(rxjs@7.8.2)(zone.js@0.14.10))(rxjs@7.8.2)
+      '@angular/common': 22.0.5(@angular/core@18.2.14(rxjs@7.8.2)(zone.js@0.14.10))(rxjs@7.8.2)
       '@angular/core': 18.2.14(rxjs@7.8.2)(zone.js@0.14.10)
-      '@angular/platform-browser': 18.2.14(@angular/common@22.0.1(@angular/core@18.2.14(rxjs@7.8.2)(zone.js@0.14.10))(rxjs@7.8.2))(@angular/core@18.2.14(rxjs@7.8.2)(zone.js@0.14.10))
+      '@angular/platform-browser': 18.2.14(@angular/common@22.0.5(@angular/core@18.2.14(rxjs@7.8.2)(zone.js@0.14.10))(rxjs@7.8.2))(@angular/core@18.2.14(rxjs@7.8.2)(zone.js@0.14.10))
       rxjs: 7.8.2
       tslib: 2.8.1
 
-  '@angular/platform-browser@18.2.14(@angular/common@22.0.1(@angular/core@18.2.14(rxjs@7.8.2)(zone.js@0.14.10))(rxjs@7.8.2))(@angular/core@18.2.14(rxjs@7.8.2)(zone.js@0.14.10))':
+  '@angular/platform-browser@18.2.14(@angular/common@22.0.5(@angular/core@18.2.14(rxjs@7.8.2)(zone.js@0.14.10))(rxjs@7.8.2))(@angular/core@18.2.14(rxjs@7.8.2)(zone.js@0.14.10))':
     dependencies:
-      '@angular/common': 22.0.1(@angular/core@18.2.14(rxjs@7.8.2)(zone.js@0.14.10))(rxjs@7.8.2)
+      '@angular/common': 22.0.5(@angular/core@18.2.14(rxjs@7.8.2)(zone.js@0.14.10))(rxjs@7.8.2)
       '@angular/core': 18.2.14(rxjs@7.8.2)(zone.js@0.14.10)
       tslib: 2.8.1
 
