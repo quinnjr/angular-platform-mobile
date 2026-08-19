@@ -79,8 +79,8 @@
   "related_applications": [
     {
       "platform": "npm",
-      "url": "https://www.npmjs.com/package/@pegasusheavy/angular-platform-mobile",
-      "id": "@pegasusheavy/angular-platform-mobile"
+      "url": "https://www.npmjs.com/package/angular-platform-mobile",
+      "id": "angular-platform-mobile"
     }
   ],
   "prefer_related_applications": false

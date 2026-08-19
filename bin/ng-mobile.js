@@ -354,7 +354,7 @@ async function createMinimalProject(projectPath, projectName, platforms, options
       '@angular/core': '^18.0.0',
       '@angular/compiler': '^18.0.0',
       '@angular/forms': '^18.0.0',
-      '@pegasusheavy/angular-platform-mobile': 'latest',
+      'angular-platform-mobile': 'latest',
       rxjs: '^7.8.0',
     },
     devDependencies: {
@@ -385,7 +385,7 @@ async function createMinimalProject(projectPath, projectName, platforms, options
   await fs.writeJson(path.join(projectPath, 'tsconfig.json'), tsconfig, { spaces: 2 });
 
   // Create main entry point
-  const mainTs = `import { bootstrapMobileApplication } from '@pegasusheavy/angular-platform-mobile';
+  const mainTs = `import { bootstrapMobileApplication } from 'angular-platform-mobile';
 import { AppComponent } from './app/app.component';
 
 bootstrapMobileApplication(AppComponent, {
@@ -401,7 +401,7 @@ bootstrapMobileApplication(AppComponent, {
 
   // Create app component
   const appComponent = `import { Component } from '@angular/core';
-import { ViewComponent, TextComponent } from '@pegasusheavy/angular-platform-mobile';
+import { ViewComponent, TextComponent } from 'angular-platform-mobile';
 
 @Component({
   selector: 'app-root',

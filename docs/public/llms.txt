@@ -15,9 +15,9 @@ Key features:
 ## Installation
 
 ```bash
-npm install @pegasusheavy/angular-platform-mobile
+npm install angular-platform-mobile
 # or
-pnpm add @pegasusheavy/angular-platform-mobile
+pnpm add angular-platform-mobile
 ```
 
 ## Quick Start
@@ -77,9 +77,9 @@ const styles = {
 ## Links
 
 - Documentation: https://angular-platform-mobile.dev
-- GitHub: https://github.com/PegasusHeavyIndustries/angular-platform-mobile
-- npm: https://www.npmjs.com/package/@pegasusheavy/angular-platform-mobile
+- GitHub: https://github.com/quinnjr/angular-platform-mobile
+- npm: https://www.npmjs.com/package/angular-platform-mobile
 
 ## License
 
-MIT License - Pegasus Heavy Industries LLC
+MIT License - Joseph R. Quinn

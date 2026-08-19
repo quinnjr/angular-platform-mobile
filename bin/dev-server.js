@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
 /**
- * @pegasusheavy/angular-platform-android Development Server
+ * angular-platform-mobile Development Server
  *
  * Handles hot reload and bridge communication during development.
  *
- * Copyright (c) 2026 Pegasus Heavy Industries LLC
+ * Copyright (c) 2026 Joseph R. Quinn
  * Licensed under the MIT License
  */
 

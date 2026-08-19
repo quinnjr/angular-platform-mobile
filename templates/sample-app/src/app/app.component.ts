@@ -11,7 +11,7 @@ import {
   ToastService,
   AlertService,
   StyleService,
-} from '@pegasusheavy/angular-platform-android';
+} from 'angular-platform-mobile';
 
 // Screen components
 import { HomeScreenComponent } from './screens/home.screen';

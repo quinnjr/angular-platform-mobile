@@ -1,5 +1,5 @@
 {
-  "name": "@pegasusheavy/angular-platform-mobile",
+  "name": "angular-platform-mobile",
   "version": "0.1.0",
   "description": "React Native-like system for Angular targeting iOS and Android - Zoneless",
   "main": "dist/index.js",
@@ -51,19 +51,15 @@
     "react-native-like",
     "cross-platform"
   ],
-  "author": "Pegasus Heavy Industries LLC",
+  "author": "Joseph R. Quinn",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/PegasusHeavyIndustries/angular-platform-mobile.git"
+    "url": "https://github.com/quinnjr/angular-platform-mobile.git"
   },
-  "homepage": "https://github.com/PegasusHeavyIndustries/angular-platform-mobile#readme",
+  "homepage": "https://github.com/quinnjr/angular-platform-mobile#readme",
   "bugs": {
-    "url": "https://github.com/PegasusHeavyIndustries/angular-platform-mobile/issues"
-  },
-  "funding": {
-    "type": "patreon",
-    "url": "https://www.patreon.com/c/PegasusHeavyIndustries?vanity=user"
+    "url": "https://github.com/quinnjr/angular-platform-mobile/issues"
   },
   "peerDependencies": {
     "@angular/common": ">=18.0.0",

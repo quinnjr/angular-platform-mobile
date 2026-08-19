@@ -22,7 +22,7 @@
     "ignoreDeprecations": "6.0",
     "baseUrl": "./",
     "paths": {
-      "@pegasusheavy/angular-platform-mobile/*": ["src/*"]
+      "angular-platform-mobile/*": ["src/*"]
     },
     "esModuleInterop": true,
     "experimentalDecorators": true,

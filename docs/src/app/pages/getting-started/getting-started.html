@@ -37,7 +37,7 @@ pnpm install</code></pre>
 <p>You can also add Angular Platform Mobile to an existing Angular project:</p>
 
 <pre><code># Install the package
-pnpm add &#64;pegasusheavy/angular-platform-mobile
+pnpm add angular-platform-mobile
 
 # Initialize mobile platform
 npx ng-mobile init --existing</code></pre>
@@ -69,7 +69,7 @@ npx ng-mobile init --existing</code></pre>
 
 <p>Update your <code>main.ts</code> to use the mobile bootstrap:</p>
 
-<pre><code>import &#123; bootstrapMobile &#125; from '&#64;pegasusheavy/angular-platform-mobile';
+<pre><code>import &#123; bootstrapMobile &#125; from 'angular-platform-mobile';
 import &#123; AppComponent &#125; from './app/app.component';
 
 bootstrapMobile(AppComponent, &#123;
@@ -89,7 +89,7 @@ import &#123;
   TextComponent,
   ButtonComponent,
   StyleSheet,
-&#125; from '&#64;pegasusheavy/angular-platform-mobile';
+&#125; from 'angular-platform-mobile';
 
 &#64;Component(&#123;
   selector: 'app-root',
@@ -181,7 +181,7 @@ npx ng-mobile build ios --release</code></pre>
 
 <p>Use <code>Platform.select()</code> to write platform-specific logic:</p>
 
-<pre><code>import &#123; Platform &#125; from '&#64;pegasusheavy/angular-platform-mobile';
+<pre><code>import &#123; Platform &#125; from 'angular-platform-mobile';
 
 const styles = StyleSheet.create(&#123;
   container: &#123;

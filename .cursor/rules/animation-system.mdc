@@ -7,7 +7,7 @@ The animation system mirrors React Native's Animated API.
 ### Creating Animated Values
 
 ```typescript
-import { Animated } from '@pegasusheavy/angular-platform-mobile';
+import { Animated } from 'angular-platform-mobile';
 
 // Single value
 const opacity = new Animated.Value(0);
@@ -46,7 +46,7 @@ Animated.spring(scale, {
 ### Easing Functions
 
 ```typescript
-import { Easing } from '@pegasusheavy/angular-platform-mobile';
+import { Easing } from 'angular-platform-mobile';
 
 Animated.timing(value, {
   toValue: 100,

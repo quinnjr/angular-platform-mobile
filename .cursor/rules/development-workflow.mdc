@@ -123,7 +123,7 @@ const bridge = new NativeBridge({
 ### Platform Detection
 
 ```typescript
-import { Platform } from '@pegasusheavy/angular-platform-mobile';
+import { Platform } from 'angular-platform-mobile';
 
 console.log('Platform:', Platform.detect()); // 'ios' | 'android'
 console.log('Is iOS:', Platform.isIOS);

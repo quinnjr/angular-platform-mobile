@@ -2,7 +2,7 @@
 
 ## Project Description
 
-Angular Platform Mobile (`@pegasusheavy/angular-platform-mobile`) is a React Native-like framework for building native iOS and Android applications using Angular. It provides a bridge between Angular components and native mobile views.
+Angular Platform Mobile (`angular-platform-mobile`) is a React Native-like framework for building native iOS and Android applications using Angular. It provides a bridge between Angular components and native mobile views.
 
 ## Key Architecture
 
