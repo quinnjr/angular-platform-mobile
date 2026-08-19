@@ -36,7 +36,7 @@ export interface ExtendedBootstrapOptions extends AndroidBootstrapOptions {
  *
  * @example
  * ```typescript
- * import { bootstrapAndroid } from '@pegasusheavy/angular-platform-mobile';
+ * import { bootstrapAndroid } from 'angular-platform-mobile';
  * import { AppModule } from './app/app.module';
  *
  * bootstrapAndroid(AppModule, {

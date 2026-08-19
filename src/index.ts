@@ -1,8 +1,8 @@
 /**
- * @pegasusheavy/angular-platform-mobile
+ * angular-platform-mobile
  * React Native-like system for Angular targeting iOS and Android
  *
- * Copyright (c) 2026 Pegasus Heavy Industries LLC
+ * Copyright (c) 2026 Joseph R. Quinn
  * Licensed under the MIT License
  */
 

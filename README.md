@@ -2,12 +2,12 @@
 
 > Build native iOS and Android apps using Angular
 
-[![npm version](https://img.shields.io/npm/v/@pegasusheavy/angular-platform-mobile.svg)](https://www.npmjs.com/package/@pegasusheavy/angular-platform-mobile)
+[![npm version](https://img.shields.io/npm/v/angular-platform-mobile.svg)](https://www.npmjs.com/package/angular-platform-mobile)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Angular](https://img.shields.io/badge/Angular-18+-dd0031.svg)](https://angular.io)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.3+-3178c6.svg)](https://www.typescriptlang.org)
 
-**Copyright © 2026 Pegasus Heavy Industries LLC**
+**Copyright © 2026 Joseph R. Quinn**
 
 ---
 
@@ -30,13 +30,13 @@ Angular Platform Mobile enables you to build native iOS and Android applications
 
 ```bash
 # Using pnpm (recommended)
-pnpm add @pegasusheavy/angular-platform-mobile
+pnpm add angular-platform-mobile
 
 # Using npm
-npm install @pegasusheavy/angular-platform-mobile
+npm install angular-platform-mobile
 
 # Using yarn
-yarn add @pegasusheavy/angular-platform-mobile
+yarn add angular-platform-mobile
 ```
 
 ## 🚀 Quick Start
@@ -53,7 +53,7 @@ cd my-app
 ```typescript
 // src/app/app.component.ts
 import { Component } from '@angular/core';
-import { ViewComponent, TextComponent, ButtonComponent } from '@pegasusheavy/angular-platform-mobile';
+import { ViewComponent, TextComponent, ButtonComponent } from 'angular-platform-mobile';
 
 @Component({
   selector: 'app-root',
@@ -94,7 +94,7 @@ export class AppComponent {
 
 ```typescript
 // src/main.ts
-import { bootstrapMobileApplication } from '@pegasusheavy/angular-platform-mobile';
+import { bootstrapMobileApplication } from 'angular-platform-mobile';
 import { AppComponent } from './app/app.component';
 
 bootstrapMobileApplication(AppComponent, {
@@ -147,7 +147,7 @@ import {
   ImageComponent,
   ScrollViewComponent,
   TextInputComponent
-} from '@pegasusheavy/angular-platform-mobile';
+} from 'angular-platform-mobile';
 
 @Component({
   selector: 'app-profile',
@@ -229,7 +229,7 @@ const styles = {
 ### NavigationService
 
 ```typescript
-import { NavigationService } from '@pegasusheavy/angular-platform-mobile';
+import { NavigationService } from 'angular-platform-mobile';
 
 @Component({ ... })
 export class HomeComponent {
@@ -248,7 +248,7 @@ export class HomeComponent {
 ### StorageService
 
 ```typescript
-import { StorageService } from '@pegasusheavy/angular-platform-mobile';
+import { StorageService } from 'angular-platform-mobile';
 
 @Component({ ... })
 export class SettingsComponent {
@@ -267,7 +267,7 @@ export class SettingsComponent {
 ### DeviceService
 
 ```typescript
-import { DeviceService } from '@pegasusheavy/angular-platform-mobile';
+import { DeviceService } from 'angular-platform-mobile';
 
 @Component({ ... })
 export class AppComponent {
@@ -282,7 +282,7 @@ export class AppComponent {
 ### PermissionsService
 
 ```typescript
-import { PermissionsService } from '@pegasusheavy/angular-platform-mobile';
+import { PermissionsService } from 'angular-platform-mobile';
 
 @Component({ ... })
 export class CameraComponent {
@@ -300,7 +300,7 @@ export class CameraComponent {
 ### AlertService
 
 ```typescript
-import { AlertService } from '@pegasusheavy/angular-platform-mobile';
+import { AlertService } from 'angular-platform-mobile';
 
 @Component({ ... })
 export class MyComponent {
@@ -436,7 +436,7 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 
 ## 📄 License
 
-MIT License - Copyright © 2026 Pegasus Heavy Industries LLC
+MIT License - Copyright © 2026 Joseph R. Quinn
 
 See [LICENSE](LICENSE) for details.
 
@@ -446,4 +446,3 @@ If you find this project useful, please consider:
 - ⭐ Starring the repository
 - 🐛 Reporting bugs
 - 💡 Suggesting features
-- 🎁 [Supporting on Patreon](https://www.patreon.com/c/PegasusHeavyIndustries?vanity=user)

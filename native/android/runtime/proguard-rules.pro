@@ -4,7 +4,7 @@
 -keep class kotlin.Metadata { *; }
 
 # Keep data classes
--keepclassmembers class com.pegasusheavy.angularmobile.** {
+-keepclassmembers class dev.quinnjr.angularmobile.** {
     <init>(...);
     <fields>;
 }

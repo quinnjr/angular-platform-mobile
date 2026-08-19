@@ -58,7 +58,7 @@ Add to your app's `build.gradle`:
 
 ```kotlin
 dependencies {
-    implementation("com.pegasusheavy:angular-mobile-runtime:0.1.0")
+    implementation("dev.quinnjr:angular-mobile-runtime:0.1.0")
 }
 ```
 
@@ -107,7 +107,7 @@ Add to your `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/PegasusHeavyIndustries/angular-platform-mobile.git", from: "0.1.0")
+    .package(url: "https://github.com/quinnjr/angular-platform-mobile.git", from: "0.1.0")
 ]
 ```
 
@@ -238,4 +238,4 @@ swift test
 
 ## License
 
-MIT License - Pegasus Heavy Industries LLC
+MIT License - Joseph R. Quinn

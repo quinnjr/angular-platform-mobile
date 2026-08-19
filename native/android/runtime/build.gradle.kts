@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.pegasusheavy.angularmobile"
+    namespace = "dev.quinnjr.angularmobile"
     compileSdk = 34
 
     defaultConfig {
@@ -59,7 +59,7 @@ dependencies {
 publishing {
     publications {
         register<MavenPublication>("release") {
-            groupId = "com.pegasusheavy"
+            groupId = "dev.quinnjr"
             artifactId = "angular-mobile-runtime"
             version = "0.1.0"
 
@@ -70,7 +70,7 @@ publishing {
             pom {
                 name.set("Angular Mobile Runtime")
                 description.set("Native Android runtime for Angular Platform Mobile")
-                url.set("https://github.com/PegasusHeavyIndustries/angular-platform-mobile")
+                url.set("https://github.com/quinnjr/angular-platform-mobile")
 
                 licenses {
                     license {
@@ -81,16 +81,16 @@ publishing {
 
                 developers {
                     developer {
-                        id.set("pegasusheavy")
-                        name.set("Pegasus Heavy Industries")
-                        email.set("dev@pegasusheavy.com")
+                        id.set("quinnjr")
+                        name.set("Joseph R. Quinn")
+                        email.set("quinn.josephr@protonmail.com")
                     }
                 }
 
                 scm {
-                    connection.set("scm:git:git://github.com/PegasusHeavyIndustries/angular-platform-mobile.git")
-                    developerConnection.set("scm:git:ssh://github.com:PegasusHeavyIndustries/angular-platform-mobile.git")
-                    url.set("https://github.com/PegasusHeavyIndustries/angular-platform-mobile")
+                    connection.set("scm:git:git://github.com/quinnjr/angular-platform-mobile.git")
+                    developerConnection.set("scm:git:ssh://github.com:quinnjr/angular-platform-mobile.git")
+                    url.set("https://github.com/quinnjr/angular-platform-mobile")
                 }
             }
         }

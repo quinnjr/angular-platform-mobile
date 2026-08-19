@@ -8,7 +8,7 @@ import {
   ToastService,
   ShareService,
   ClipboardService,
-} from '@pegasusheavy/angular-platform-android';
+} from 'angular-platform-android';
 
 @Component({
   selector: 'app-profile-screen',

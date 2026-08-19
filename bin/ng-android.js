@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
 /**
- * @pegasusheavy/angular-platform-android CLI
+ * angular-platform-android CLI
  *
  * Command-line interface for building and running Angular Android apps.
  *
- * Copyright (c) 2026 Pegasus Heavy Industries LLC
+ * Copyright (c) 2026 Joseph R. Quinn
  * Licensed under the MIT License
  */
 

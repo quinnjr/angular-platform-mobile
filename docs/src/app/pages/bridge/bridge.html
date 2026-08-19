@@ -41,7 +41,7 @@
 
 <p>The <code>BridgeService</code> is the primary way to interact with the native layer:</p>
 
-<pre><code>import &#123; BridgeService &#125; from '&#64;pegasusheavy/angular-platform-mobile';
+<pre><code>import &#123; BridgeService &#125; from 'angular-platform-mobile';
 
 &#64;Component(&#123;...&#125;)
 export class MyComponent &#123;
@@ -161,7 +161,7 @@ console.log('File contents:', result);</code></pre>
 
 <p>Enable debug logging to see all bridge communication:</p>
 
-<pre><code>import &#123; bootstrapMobile &#125; from '&#64;pegasusheavy/angular-platform-mobile';
+<pre><code>import &#123; bootstrapMobile &#125; from 'angular-platform-mobile';
 
 bootstrapMobile(AppComponent, &#123;
   config: &#123;
@@ -184,7 +184,7 @@ bootstrapMobile(AppComponent, &#123;
 
 <pre><code>// my-module.service.ts
 import &#123; Injectable &#125; from '&#64;angular/core';
-import &#123; BridgeService &#125; from '&#64;pegasusheavy/angular-platform-mobile';
+import &#123; BridgeService &#125; from 'angular-platform-mobile';
 
 &#64;Injectable(&#123; providedIn: 'root' &#125;)
 export class MyModuleService &#123;

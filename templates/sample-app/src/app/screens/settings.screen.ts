@@ -10,7 +10,7 @@ import {
   AlertService,
   LinkingService,
   StorageService,
-} from '@pegasusheavy/angular-platform-android';
+} from 'angular-platform-android';
 
 @Component({
   selector: 'app-settings-screen',
@@ -174,7 +174,7 @@ import {
       <!-- Footer -->
       <android-view [style]="styles.footer">
         <android-text [style]="styles.footerText">
-          © 2026 Pegasus Heavy Industries LLC
+          © 2026 Joseph R. Quinn
         </android-text>
         <android-text [style]="styles.footerSubtext">
           Made with ❤️ using Angular
@@ -310,16 +310,16 @@ export class SettingsScreenComponent {
   }
 
   async onOpenDocs(): Promise<void> {
-    await this.linking.openURL('https://github.com/PegasusHeavyIndustries/angular-platform-android');
+    await this.linking.openURL('https://github.com/quinnjr/angular-platform-android');
   }
 
   async onOpenGitHub(): Promise<void> {
-    await this.linking.openURL('https://github.com/PegasusHeavyIndustries/angular-platform-android');
+    await this.linking.openURL('https://github.com/quinnjr/angular-platform-android');
   }
 
   async onContactSupport(): Promise<void> {
     await this.linking.email({
-      to: ['support@pegasusheavy.io'],
+      to: ['quinn.josephr@protonmail.com'],
       subject: 'Support Request',
     });
   }

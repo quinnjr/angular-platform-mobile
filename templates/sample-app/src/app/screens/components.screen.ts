@@ -13,7 +13,7 @@ import {
   ImageComponent,
   ToastService,
   AlertService,
-} from '@pegasusheavy/angular-platform-android';
+} from 'angular-platform-android';
 
 @Component({
   selector: 'app-components-screen',

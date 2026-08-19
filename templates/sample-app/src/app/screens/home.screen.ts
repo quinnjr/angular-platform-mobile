@@ -7,7 +7,7 @@ import {
   ScrollViewComponent,
   TouchableComponent,
   ToastService,
-} from '@pegasusheavy/angular-platform-android';
+} from 'angular-platform-android';
 
 @Component({
   selector: 'app-home-screen',

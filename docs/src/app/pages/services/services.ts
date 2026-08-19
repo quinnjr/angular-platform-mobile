@@ -89,7 +89,7 @@ import {
   DeviceService,
   HapticService,
   AlertService
-} from '@pegasusheavy/angular-platform-mobile';
+} from 'angular-platform-mobile';
 
 @Component({
   selector: 'app-settings',
@@ -125,7 +125,7 @@ export class SettingsComponent {
   }
 }`;
 
-  protected readonly codeExample2 = `import { DeviceService } from '@pegasusheavy/angular-platform-mobile';
+  protected readonly codeExample2 = `import { DeviceService } from 'angular-platform-mobile';
 
 @Component({...})
 export class MyComponent {
@@ -141,7 +141,7 @@ export class MyComponent {
   colorScheme$ = this.deviceService.colorScheme$;
 }`;
 
-  protected readonly codeExample3 = `import { PermissionsService } from '@pegasusheavy/angular-platform-mobile';
+  protected readonly codeExample3 = `import { PermissionsService } from 'angular-platform-mobile';
 
 @Component({...})
 export class CameraComponent {

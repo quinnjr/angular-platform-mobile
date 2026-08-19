@@ -4,7 +4,7 @@ const typescriptParser = require('@typescript-eslint/parser');
 /**
  * ESLint Configuration
  *
- * @pegasusheavy/angular-platform-mobile
+ * angular-platform-mobile
  */
 module.exports = [
   {

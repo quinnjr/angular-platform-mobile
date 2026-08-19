@@ -1,4 +1,4 @@
-package com.pegasusheavy.angularmobile
+package dev.quinnjr.angularmobile
 
 import org.json.JSONObject
 import java.util.concurrent.ConcurrentHashMap

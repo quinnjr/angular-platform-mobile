@@ -7,10 +7,10 @@ Pod::Spec.new do |s|
     enabling developers to build truly native iOS applications using Angular.
   DESC
 
-  s.homepage         = 'https://github.com/PegasusHeavyIndustries/angular-platform-mobile'
+  s.homepage         = 'https://github.com/quinnjr/angular-platform-mobile'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'Pegasus Heavy Industries' => 'dev@pegasusheavy.com' }
-  s.source           = { :git => 'https://github.com/PegasusHeavyIndustries/angular-platform-mobile.git', :tag => s.version.to_s }
+  s.author           = { 'Joseph R. Quinn' => 'quinn.josephr@protonmail.com' }
+  s.source           = { :git => 'https://github.com/quinnjr/angular-platform-mobile.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '15.0'
   s.swift_version = '5.9'

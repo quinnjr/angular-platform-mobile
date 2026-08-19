@@ -1,4 +1,4 @@
-package com.pegasusheavy.angularmobile
+package dev.quinnjr.angularmobile
 
 import android.content.Context
 import android.graphics.Color

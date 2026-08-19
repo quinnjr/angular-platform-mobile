@@ -27,7 +27,7 @@ This project and everyone participating in it is governed by our commitment to p
    ```
 3. **Add the upstream remote**:
    ```bash
-   git remote add upstream https://github.com/PegasusHeavyIndustries/angular-platform-mobile.git
+   git remote add upstream https://github.com/quinnjr/angular-platform-mobile.git
    ```
 
 ## Development Setup
